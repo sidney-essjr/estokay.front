@@ -1,7 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Loading from "../../../assets/svg/Loading";
 import {
   FormLoginFields,
   formLoginValidationSchema,
@@ -9,7 +10,6 @@ import {
 import { postLogin } from "../../../data/fetchFormLogin";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
-import Loading from "../../../assets/svg/Loading";
 
 export default function FormLogin() {
   const {
@@ -19,12 +19,13 @@ export default function FormLogin() {
     formState: { errors, isSubmitting },
   } = useForm<FormLoginFields>({ resolver: zodResolver(formLoginValidationSchema) });
   const [fetchInfo, setFetchInfo] = useState("");
+  const navigate = useNavigate();
 
   async function onSubmit(data: FormLoginFields) {
     const response = await postLogin(data);
     if (response.result) {
-      // direcionar para home
       reset();
+      navigate("/cadastros");
     } else {
       setFetchInfo(response.message);
       setTimeout(() => {

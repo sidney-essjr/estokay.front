@@ -3,13 +3,19 @@ import AccessLayout from "../layouts/AccessLayout";
 import EsqueceuSenhaPage from "../pages/EsqueceuSenhaPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
+import RedefinirSenhaPage from "../pages/RedefinirSenhaPage";
+import RootLayout from "../layouts/RootLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: "",
+    element: <RootLayout />,
     errorElement: "",
-    children: [{ index: true, element: <HomePage /> }],
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "cadastros", element: "cadastros" },
+      { path: "perfil", element: "perfil" },
+    ],
   },
   {
     path: "/access",
@@ -25,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "redefinir-senha",
-        element: "",
+        element: <RedefinirSenhaPage />,
       },
     ],
   },
