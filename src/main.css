@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-roboto text-text-color;
+}
+
+:root {
+  --text-color: #6b7280;
+  --success-color: #168821;
+  --attention-color: #ffcd07;
+  --detail-color: #fb3b2e;
+}
+
+.animeLeft {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: animeLeft 0.3s forwards;
+}
