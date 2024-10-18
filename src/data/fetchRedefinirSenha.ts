@@ -14,7 +14,7 @@ export async function postRedefinirSenha(novaSenha: string, token: string) {
 
     console.log({ token, novaSenha });
 
-    return await responseHandler(response, "Senha redefinida com sucesso!");
+    return await responseHandler(response, { message: "Senha redefinida com sucesso!" });
   } catch (error) {
     return catchErrorHandler(error);
   }

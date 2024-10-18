@@ -1,6 +1,9 @@
-export async function responseHandler(res: Response, message?: string) {
+export async function responseHandler<T>(
+  res: Response,
+  options: { message?: string; result?: T } = {}
+) {
   if (res.ok) {
-    return { result: true, message: message ?? "" };
+    return { result: options.result ?? true, message: options.message ?? "" };
   } else {
     const errorData = await res.json();
     return {

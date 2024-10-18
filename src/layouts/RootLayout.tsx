@@ -2,21 +2,20 @@ import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import ConfigSVG from "../assets/svg/ConfigSVG";
 import PadlockSVG from "../assets/svg/PadlockSVG";
-import { sessionLogin } from "../common/utils/sessionLogin";
+import { useAuthContext } from "../hooks/useAuth";
 
 export default function RootLayout() {
   const [acesso, setAcesso] = useState({ logado: false, nome: "acessar" });
   const location = useLocation();
+  const { data } = useAuthContext();
 
   useEffect(() => {
-    async function handleSessionLogin() {
-      const decoded = await sessionLogin();
-      if (decoded) {
-        setAcesso({ logado: true, nome: decoded.nome.split(" ")[0] });
-      }
+    if (data) {
+      setAcesso({ logado: true, nome: data.nome.split(" ")[0] });
+    } else {
+      setAcesso({ logado: false, nome: "acessar" });
     }
-    handleSessionLogin();
-  }, []);
+  }, [data, location.pathname]);
 
   return (
     <>
@@ -32,11 +31,7 @@ export default function RootLayout() {
         <div className="flex md:pr-32 sm:pr-4 items-center space-x-3 text-gray-500">
           <p>Ambiente seguro</p>
           <PadlockSVG />
-          {acesso.logado ? (
-            <Link to={"/cadastros"}>{acesso.nome}</Link>
-          ) : (
-            <Link to={"/access/login"}>{acesso.nome}</Link>
-          )}
+          <Link to={acesso.logado ? "/cadastros" : "/access/login"}>{acesso.nome}</Link>
           {location.pathname !== "/" && (
             <Link to={"/perfil"}>
               <ConfigSVG />

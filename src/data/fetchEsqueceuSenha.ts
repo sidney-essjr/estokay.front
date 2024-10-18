@@ -12,7 +12,7 @@ export async function postEsqueceuSenha(data: FormEsqueceuSenhaField) {
       body: JSON.stringify(data),
     });
 
-    return await responseHandler(response, "E-mail enviado com sucesso!");
+    return await responseHandler(response, { message: "E-mail enviado com sucesso!" });
   } catch (error) {
     return catchErrorHandler(error);
   }

@@ -1,20 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
 import AccessLayout from "../layouts/AccessLayout";
+import ProtectedLayout from "../layouts/ProtectedLayout";
+import RootLayout from "../layouts/RootLayout";
 import EsqueceuSenhaPage from "../pages/EsqueceuSenhaPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RedefinirSenhaPage from "../pages/RedefinirSenhaPage";
-import RootLayout from "../layouts/RootLayout";
+import AuthContextProvider from "../providers/context/authContext";
+import AcessoNaoAutorizadoPage from "../pages/AcessoNaoAutorizadoPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: (
+      <AuthContextProvider>
+        <RootLayout />
+      </AuthContextProvider>
+    ),
     errorElement: "",
     children: [
       { index: true, element: <HomePage /> },
-      { path: "cadastros", element: "cadastros" },
-      { path: "perfil", element: "perfil" },
+      { path: "cadastros", element: <ProtectedLayout>Cadastros</ProtectedLayout> },
+      { path: "perfil", element: <ProtectedLayout>Perfil</ProtectedLayout> },
     ],
   },
   {
@@ -37,7 +44,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/nao-autorizado",
-    element: "",
+    element: <AcessoNaoAutorizadoPage />,
   },
 ]);
 
