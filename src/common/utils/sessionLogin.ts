@@ -3,16 +3,17 @@ import { decodeToken } from "./decodeToken";
 import Cookies from "js-cookie";
 
 export async function sessionLogin() {
-  const response = await postSessionLogin();
+  let decoded: {
+    id: string;
+    nome: string;
+    email: string;
+  } | null;
 
-  if (response) {
-    const token = Cookies.get("accessToken");
-    let decoded: {
-      id: string;
-      nome: string;
-      email: string;
-    } | null;
-    if (token) {
+  const token = Cookies.get("accessToken");
+
+  if (token) {
+    const response = await postSessionLogin();
+    if (response) {
       decoded = decodeToken(token);
       return decoded;
     }
