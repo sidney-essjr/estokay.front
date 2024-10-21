@@ -11,6 +11,7 @@ export default {
         "text-color": "var(--text-color)",
         "success-color": "var(--success-color)",
         "attention-color": "var(--attention-color)",
+        "logo-gray-color": "var(--logo-gray-color)",
       },
     },
   },

@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import "./Sidebar.css"; // Suponha que os estilos estejam definidos aqui
 
 export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -23,12 +22,13 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`sidebar ${isExpanded ? "expanded" : ""}`}
+      className={`p-3 sm:h-[calc(100vh-128px)] h-16 top-4 sm:top-0 rounded-none sm:rounded-tr-lg bg-logo-gray-color z-50 text-white absolute overflow-hidden transition-width duration-300 ease-in-out ${
+        isExpanded ? "sm:w-52 w-screen" : "sm:w-16 w-screen"
+      }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Conteúdo da sidebar */}
-      <div className="sidebar-content">
+      <div>
         {isExpanded ? (
           <>
             <p>Item 1</p>
@@ -42,20 +42,3 @@ export default function Sidebar() {
     </div>
   );
 }
-
-// .sidebar {
-//   width: 60px; /* Largura padrão da sidebar colapsada */
-//   height: 100vh;
-//   background-color: #333;
-//   color: white;
-//   transition: width 0.3s ease; /* Anima a largura */
-//   overflow: hidden;
-// }
-
-// .sidebar.expanded {
-//   width: 200px; /* Largura da sidebar expandida */
-// }
-
-// .sidebar-content {
-//   padding: 10px;
-// }

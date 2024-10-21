@@ -3,12 +3,17 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import ConfigSVG from "../assets/svg/ConfigSVG";
 import PadlockSVG from "../assets/svg/PadlockSVG";
 import { sessionLogin } from "../common/utils/sessionLogin";
+import Sidebar from "../components/sidebar/SidebarContainer";
 
 export default function RootLayout() {
   const [acesso, setAcesso] = useState({ logado: false, nome: "acessar" });
+  const [atHome, setAtHome] = useState(true);
+
   const location = useLocation();
 
   useEffect(() => {
+    setAtHome(location.pathname === "/");
+
     async function handleSessionLogin() {
       const response = await sessionLogin();
       const result = response?.result;
@@ -36,14 +41,15 @@ export default function RootLayout() {
           <p>Ambiente seguro</p>
           <PadlockSVG />
           <Link to={acesso.logado ? "/cadastros" : "/access/login"}>{acesso.nome}</Link>
-          {location.pathname !== "/" && (
+          {!atHome && (
             <Link to={"/perfil"}>
               <ConfigSVG />
             </Link>
           )}
         </div>
       </header>
-      <section>
+      <section className={` ${!atHome ? "relative" : "block"}  `}>
+        {!atHome && <Sidebar />}
         <Outlet />
       </section>
     </>
