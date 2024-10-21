@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import ConfigSVG from "../assets/svg/ConfigSVG";
+import LogoutSVG from "../assets/svg/LogoutSVG";
 import PadlockSVG from "../assets/svg/PadlockSVG";
 import { sessionLogin } from "../common/utils/sessionLogin";
 import Sidebar from "../components/sidebar/SidebarContainer";
@@ -42,8 +42,8 @@ export default function RootLayout() {
           <PadlockSVG />
           <Link to={acesso.logado ? "/cadastros" : "/access/login"}>{acesso.nome}</Link>
           {!atHome && (
-            <Link to={"/perfil"}>
-              <ConfigSVG />
+            <Link to={"/"}>
+              <LogoutSVG />
             </Link>
           )}
         </div>

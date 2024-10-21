@@ -1,4 +1,9 @@
 import { useRef, useState } from "react";
+import NewRegisterSVG from "../../assets/svg/NewRegisterSVG";
+import SidebarItem from "./SidebarItem";
+import ListItemsSVG from "../../assets/svg/ListItemsSVG";
+import ReportSVG from "../../assets/svg/ReportsSVG";
+import ConfigSVG from "../../assets/svg/ConfigSVG";
 
 export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -22,22 +27,17 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`p-3 sm:h-[calc(100vh-128px)] h-16 top-4 sm:top-0 rounded-none sm:rounded-tr-lg bg-logo-gray-color z-50 text-white absolute overflow-hidden transition-width duration-300 ease-in-out ${
+      className={`flex justify-center items-center sm:items-start  sm:justify-start sm:h-[calc(100vh-128px)] h-16 top-4 sm:top-0 rounded-none sm:rounded-tr-lg bg-logo-gray-color z-50 text-white absolute overflow-hidden transition-width duration-300 ease-in-out ${
         isExpanded ? "sm:w-52 w-screen" : "sm:w-16 w-screen"
       }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div>
-        {isExpanded ? (
-          <>
-            <p>Item 1</p>
-            <p>Item 2</p>
-            <p>Item 3</p>
-          </>
-        ) : (
-          <p>Hover to Expand</p>
-        )}
+      <div className="flex sm:flex-col">
+        <SidebarItem icon={<NewRegisterSVG />} isExpanded={isExpanded} desc="Cadastro" path="/cadastro"/>
+        <SidebarItem icon={<ListItemsSVG />} isExpanded={isExpanded} desc="Itens" path="/estoque"/>
+        <SidebarItem icon={<ReportSVG />} isExpanded={isExpanded} desc="Relatório" path="/relatorio"/>
+        <SidebarItem icon={<ConfigSVG />} isExpanded={isExpanded} desc="Configurações" path="/configuracoes"/>
       </div>
     </div>
   );

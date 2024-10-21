@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import AccessLayout from "../layouts/AccessLayout";
+import LayoutHomeLogado from "../layouts/LayoutHomeLogado";
 import RootLayout from "../layouts/RootLayout";
 import AcessoNaoAutorizadoPage from "../pages/AcessoNaoAutorizadoPage";
 import CadastroPage from "../pages/CadastroPage";
@@ -20,11 +21,20 @@ const router = createBrowserRouter([
         path: "cadastros",
         element: (
           <ProtectedRoute>
-            <CadastroPage />
+            <LayoutHomeLogado>
+              <CadastroPage />
+            </LayoutHomeLogado>
           </ProtectedRoute>
         ),
       },
-      { path: "perfil", element: <ProtectedRoute>Perfil</ProtectedRoute> },
+      {
+        path: "perfil",
+        element: (
+          <ProtectedRoute>
+            <LayoutHomeLogado>Perfil</LayoutHomeLogado>
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   {
