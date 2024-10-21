@@ -2,20 +2,24 @@ import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import ConfigSVG from "../assets/svg/ConfigSVG";
 import PadlockSVG from "../assets/svg/PadlockSVG";
-import { useAuthContext } from "../hooks/useAuth";
+import { sessionLogin } from "../common/utils/sessionLogin";
 
 export default function RootLayout() {
   const [acesso, setAcesso] = useState({ logado: false, nome: "acessar" });
   const location = useLocation();
-  const { data } = useAuthContext();
 
   useEffect(() => {
-    if (data) {
-      setAcesso({ logado: true, nome: data.nome.split(" ")[0] });
-    } else {
-      setAcesso({ logado: false, nome: "acessar" });
+    async function handleSessionLogin() {
+      const response = await sessionLogin();
+      const result = response?.result;
+      if (result && typeof result === "object") {
+        setAcesso({ logado: true, nome: result.nome.split(" ")[0] });
+      } else {
+        setAcesso({ logado: false, nome: "acessar" });
+      }
     }
-  }, [data, location.pathname]);
+    handleSessionLogin();
+  }, [location]);
 
   return (
     <>

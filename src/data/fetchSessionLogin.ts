@@ -1,6 +1,6 @@
 import { catchErrorHandler } from "../common/utils/errorHandler";
 import { responseHandler } from "../common/utils/responseHandler";
-import { AuthDataProps } from "../providers/context/authContext";
+import { DataVonlutario } from "../providers/context/DataVolutarioContext";
 
 export async function postSessionLogin() {
   try {
@@ -14,10 +14,10 @@ export async function postSessionLogin() {
     let result;
 
     if (response.ok) {
-      result = (await response.json()) as AuthDataProps;
+      result = (await response.json()) as DataVonlutario;
     }
 
-    return await responseHandler<AuthDataProps>(response, { result: result });
+    return await responseHandler<DataVonlutario>(response, { result: result });
   } catch (error) {
     return catchErrorHandler(error);
   }

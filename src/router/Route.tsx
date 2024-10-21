@@ -1,27 +1,22 @@
 import { createBrowserRouter } from "react-router-dom";
 import AccessLayout from "../layouts/AccessLayout";
-import ProtectedLayout from "../layouts/ProtectedLayout";
 import RootLayout from "../layouts/RootLayout";
+import AcessoNaoAutorizadoPage from "../pages/AcessoNaoAutorizadoPage";
 import EsqueceuSenhaPage from "../pages/EsqueceuSenhaPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RedefinirSenhaPage from "../pages/RedefinirSenhaPage";
-import AuthContextProvider from "../providers/context/authContext";
-import AcessoNaoAutorizadoPage from "../pages/AcessoNaoAutorizadoPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <AuthContextProvider>
-        <RootLayout />
-      </AuthContextProvider>
-    ),
+    element: <RootLayout />,
     errorElement: "",
     children: [
       { index: true, element: <HomePage /> },
-      { path: "cadastros", element: <ProtectedLayout>Cadastros</ProtectedLayout> },
-      { path: "perfil", element: <ProtectedLayout>Perfil</ProtectedLayout> },
+      { path: "cadastros", element: <ProtectedRoute>Cadastros</ProtectedRoute> },
+      { path: "perfil", element: <ProtectedRoute>Perfil</ProtectedRoute> },
     ],
   },
   {
