@@ -30,7 +30,7 @@ export default function RootLayout() {
     <>
       <header className="w-full min-h-32 flex flex-col m-auto items-center sm:flex-row">
         <div className="flex-1">
-          <Link to={acesso.logado ? "/cadastros" : "/"}>
+          <Link to={acesso.logado ? "/cadastro" : "/"}>
             <img
               src="https://estokay-unisenai.vercel.app/logo.png"
               alt="Logo com a escrita EstOkay em cinza e vermelho"
@@ -40,7 +40,7 @@ export default function RootLayout() {
         <div className="flex md:pr-32 sm:pr-4 items-center space-x-3 text-gray-500">
           <p>Ambiente seguro</p>
           <PadlockSVG />
-          <Link to={acesso.logado ? "/cadastros" : "/access/login"}>{acesso.nome}</Link>
+          <Link to={acesso.logado ? "/cadastro" : "/access/login"}>{acesso.nome}</Link>
           {!atHome && (
             <Link to={"/"}>
               <LogoutSVG />
@@ -48,7 +48,7 @@ export default function RootLayout() {
           )}
         </div>
       </header>
-      <section className={` ${!atHome ? "relative" : "block"}  `}>
+      <section className={` ${!atHome ? "sm:h-[calc(100vh-128px)] relative bg-logo-gray-color" : "block"}  `}>
         {!atHome && <Sidebar />}
         <Outlet />
       </section>

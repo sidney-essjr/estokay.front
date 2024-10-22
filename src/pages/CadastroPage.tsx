@@ -1,3 +1,9 @@
+import FormDoacao from "../components/register/FormDoacao";
+
 export default function CadastroPage() {
-  return <div>CadastroPage</div>;
+  return (
+    <div>
+      <FormDoacao />
+    </div>
+  );
 }

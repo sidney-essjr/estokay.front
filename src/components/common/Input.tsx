@@ -5,12 +5,14 @@ type InputProps = ComponentPropsWithRef<"input"> & {
   type?: HTMLInputTypeAttribute;
   label: string;
   error?: string;
+  className?: string;
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ id, label, type = "text", error, ...rest }: InputProps, ref) => {
+  ({ id, label, type = "text", error, className = "", ...rest }: InputProps, ref) => {
+    const style = className;
     return (
-      <div className="space-y-1">
+      <div className={`space-y-1 ${style}`}>
         <div className="flex justify-between">
           <label className="text-sm" htmlFor={id}>
             {label.toLocaleUpperCase()}
@@ -19,7 +21,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
         <input
           ref={ref}
-          className="outline-detail-color h-12 w-full py-4 px-8 border-[1px] border-gray-400 rounded-sm"
+          className="outline-detail-color h-12 w-full py-4 px-8 border-[1px] border-gray-400 rounded-sm text-sm"
           id={id}
           type={type}
           {...rest}

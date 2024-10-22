@@ -14,7 +14,7 @@ export default function SidebarItem({
 }) {
   return (
     <Link to={path}>
-      <div className="flex flex-col sm:flex-row p-3 space-x-3">
+      <div className="flex p-3 space-x-3">
         <div>{icon}</div>
         <div
           className={`sm:block hidden content-center transition-opacity duration-300 ease-in-out ${

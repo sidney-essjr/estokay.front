@@ -1,7 +1,7 @@
 import { ComponentPropsWithRef } from "react";
 
 type ButtonProps = ComponentPropsWithRef<"button"> & {
-  variant?: "default" | "success" | "attention" | "none";
+  variant?: "default" | "success" | "attention" | "neutral" | "none";
   className?: string;
 };
 
@@ -20,6 +20,9 @@ export default function Button({
       break;
     case "attention":
       bgStyle = "bg-attention-color";
+      break;
+    case "neutral":
+      bgStyle = "bg-neutral-color";
       break;
     case "none":
       bgStyle = "bg-text-color";

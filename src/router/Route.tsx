@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       {
-        path: "cadastros",
+        path: "cadastro",
         element: (
           <ProtectedRoute>
             <LayoutHomeLogado>
