@@ -1,4 +1,11 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import Loading from "../../assets/svg/Loading";
+import {
+  FormDoacaoFields,
+  formDoacaoValidationSchema,
+} from "../../common/validations/formDoacaoValidationSchema";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import SelectableInput from "../common/SelectableInput";
@@ -11,30 +18,46 @@ export default function FormDoacao() {
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
-  } = useForm({
+  } = useForm<FormDoacaoFields>({
+    resolver: zodResolver(formDoacaoValidationSchema),
     defaultValues: {
-      doador: {},
-      dataEntrada: "",
-      doacao: [{ item: "", quantidade: 1, tipo: "", tamanho: "", medida: "", validade: "" }],
+      doador: undefined,
+      dataEntrada: undefined,
+      itens: [
+        { descricao: undefined, quantidade: undefined, tipo: undefined, tamanho: "N/A", medida: undefined, validade: undefined },
+      ],
     },
   });
 
+  const [fetchInfo, setFetchInfo] = useState("");
+
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "doacao",
+    name: "itens",
   });
 
+  async function onSubmit() {
+    reset();
+  }
+
   return (
-    <form noValidate className="flex flex-col space-y-2">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col space-y-2">
       <div className="grid sm:grid-cols-4 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm">
         <SelectableInput
           id="doador"
           label="Doador*"
           options={[]}
           className="col-span-2"
+          error={errors.doador?.message}
           {...register("doador")}
         />
-        <Input id="data-entrada" label="Data entrada*" type="date" {...register("dataEntrada")} />
+        <Input
+          id="data-entrada"
+          label="Data entrada*"
+          type="date"
+          error={errors.dataEntrada?.message}
+          {...register("dataEntrada")}
+        />
         <Button type="button" variant="neutral">
           Novo
         </Button>
@@ -45,43 +68,48 @@ export default function FormDoacao() {
           className="grid grid-cols-2 md:grid-cols-4 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm"
         >
           <Input
-            id={`doacao.${index}.item`}
-            label="Item*"
+            id={`itens.${index}.descricao`}
+            label="Descricao*"
             className="col-span-2"
-            {...register(`doacao.${index}.item`)}
+            error={errors?.itens?.[index]?.descricao?.message}
+            {...register(`itens.${index}.descricao`)}
           />
           <Input
-            id={`doacao.${index}.quantidade`}
+            id={`itens.${index}.quantidade`}
             label="Quantidade*"
             type="number"
             min={1}
             max={1000}
-            step={1}
-            {...register(`doacao.${index}.quantidade`)}
+            error={errors?.itens?.[index]?.quantidade?.message}
+            {...register(`itens.${index}.quantidade`)}
           />
           <SelectableInput
-            id={`doacao.${index}.tipo`}
+            id={`itens.${index}.tipo`}
             label="Tipo*"
             options={tipos}
-            {...register(`doacao.${index}.tipo`)}
+            error={errors?.itens?.[index]?.tipo?.message}
+            {...register(`itens.${index}.tipo`)}
           />
           <SelectableInput
-            id={`doacao.${index}.tamanho`}
+            id={`itens.${index}.tamanho`}
             label="Tamanho"
             options={tamanhos}
-            {...register(`doacao.${index}.tamanho`)}
+            error={errors?.itens?.[index]?.tamanho?.message}
+            {...register(`itens.${index}.tamanho`)}
           />
           <SelectableInput
-            id={`doacao.${index}.medida`}
+            id={`itens.${index}.medida`}
             label="Medida*"
             options={medida}
-            {...register(`doacao.${index}.medida`)}
+            error={errors?.itens?.[index]?.medida?.message}
+            {...register(`itens.${index}.medida`)}
           />
           <Input
-            id={`doacao.${index}.validade`}
+            id={`itens.${index}.validade`}
             label="Validade"
             type="date"
-            {...register(`doacao.${index}.validade`)}
+            error={errors?.itens?.[index]?.validade?.message}
+            {...register(`itens.${index}.validade`)}
           />
           <Button onClick={() => remove(index)}>Remover</Button>
         </div>
@@ -91,14 +119,27 @@ export default function FormDoacao() {
           type="button"
           variant="neutral"
           onClick={() =>
-            append({ item: "", quantidade: 1, tipo: "", tamanho: "", medida: "", validade: "" })
+            append({
+              descricao: "",
+              quantidade: 1,
+              tipo: "",
+              tamanho: undefined,
+              medida: "",
+              validade: null,
+            })
           }
         >
           + item
         </Button>
-        <Button type="submit" variant="success">
-          Registrar
+        <Button type="submit" variant="success" disabled={isSubmitting}>
+          {isSubmitting ? <Loading /> : "Registrar"}
         </Button>
+
+        {fetchInfo ? (
+          <p className="h-9 pt-9 text-center text-sm text-detail-color">{fetchInfo}</p>
+        ) : (
+          <p className="h-9 pt-9"></p>
+        )}
       </div>
     </form>
   );

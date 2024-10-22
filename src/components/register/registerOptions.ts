@@ -8,7 +8,7 @@ export const tipos = [
 ];
 
 export const tamanhos = [
-  { value: "", desc: "N/A" },
+  { value: "N/A", desc: "N/A" },
   { value: "pequeno", desc: "PEQUENO" },
   { value: "médio", desc: "MÉDIO" },
   { value: "grande", desc: "GRANDE" },
