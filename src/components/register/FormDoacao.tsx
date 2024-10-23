@@ -1,17 +1,26 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import { UseQueryResult } from "react-query";
 import Loading from "../../assets/svg/Loading";
 import {
   FormDoacaoFields,
   formDoacaoValidationSchema,
 } from "../../common/validations/formDoacaoValidationSchema";
+import { Doador } from "../../types/doador";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import SelectableInput from "../common/SelectableInput";
 import { medida, tamanhos, tipos } from "./registerOptions";
 
-export default function FormDoacao() {
+export default function FormDoacao({
+  query,
+}: {
+  query: UseQueryResult<{
+    result: boolean | Doador[];
+    message: string;
+  }>;
+}) {
   const {
     register,
     reset,
@@ -24,13 +33,19 @@ export default function FormDoacao() {
       doador: undefined,
       dataEntrada: undefined,
       itens: [
-        { descricao: undefined, quantidade: undefined, tipo: undefined, tamanho: "N/A", medida: undefined, validade: undefined },
+        {
+          descricao: undefined,
+          quantidade: undefined,
+          tipo: undefined,
+          tamanho: "N/A",
+          medida: undefined,
+          validade: undefined,
+        },
       ],
     },
   });
-
+  const data = typeof query.data?.result === "object" ? query.data?.result : [];
   const [fetchInfo, setFetchInfo] = useState("");
-
   const { fields, append, remove } = useFieldArray({
     control,
     name: "itens",
@@ -46,7 +61,7 @@ export default function FormDoacao() {
         <SelectableInput
           id="doador"
           label="Doador*"
-          options={[]}
+          options={data.map((doador) => ({ value: doador.id, desc: doador.nome }))}
           className="col-span-2"
           error={errors.doador?.message}
           {...register("doador")}
@@ -134,13 +149,14 @@ export default function FormDoacao() {
         <Button type="submit" variant="success" disabled={isSubmitting}>
           {isSubmitting ? <Loading /> : "Registrar"}
         </Button>
-
-        {fetchInfo ? (
-          <p className="h-9 pt-9 text-center text-sm text-detail-color">{fetchInfo}</p>
-        ) : (
-          <p className="h-9 pt-9"></p>
-        )}
       </div>
+      {fetchInfo !== "" ? (
+        <p className="h-9 pt-9 text-center text-sm text-detail-color">{fetchInfo}</p>
+      ) : errors.itens?.message ? (
+        <p className="h-9 pt-9 text-center text-sm text-detail-color">{errors.itens?.message}</p>
+      ) : (
+        <p className="h-9 pt-9"></p>
+      )}
     </form>
   );
 }
