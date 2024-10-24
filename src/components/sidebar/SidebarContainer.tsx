@@ -27,7 +27,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`absolute flex justify-center items-center sm:items-start sm:justify-start sm:h-[calc(100vh-128px)] h-16 top-4 sm:top-0 rounded-none sm:rounded-tr-lg bg-logo-gray-color z-50 text-white overflow-hidden transition-width duration-300 ease-in-out ${
+      className={`absolute flex justify-center items-center sm:items-start sm:justify-start sm:h-[calc(100vh-128px)] h-16 top-4 sm:top-0 rounded-none sm:rounded-tr-lg bg-logo-gray-color z-30 text-white overflow-hidden transition-width duration-300 ease-in-out ${
         isExpanded ? "sm:w-52 w-screen" : "sm:w-16 w-screen"
       }`}
       onMouseEnter={handleMouseEnter}

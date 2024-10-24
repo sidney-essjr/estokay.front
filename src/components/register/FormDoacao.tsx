@@ -15,11 +15,13 @@ import { medida, tamanhos, tipos } from "./registerOptions";
 
 export default function FormDoacao({
   query,
+  openModal,
 }: {
   query: UseQueryResult<{
     result: boolean | Doador[];
     message: string;
   }>;
+  openModal: (open: boolean) => void;
 }) {
   const {
     register,
@@ -56,7 +58,7 @@ export default function FormDoacao({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col space-y-2">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col space-y-2 ">
       <div className="grid sm:grid-cols-4 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm">
         <SelectableInput
           id="doador"
@@ -73,7 +75,7 @@ export default function FormDoacao({
           error={errors.dataEntrada?.message}
           {...register("dataEntrada")}
         />
-        <Button type="button" variant="neutral">
+        <Button onClick={() => openModal(true)} type="button" variant="neutral">
           Novo
         </Button>
       </div>
@@ -136,11 +138,11 @@ export default function FormDoacao({
           onClick={() =>
             append({
               descricao: "",
-              quantidade: 1,
+              quantidade: "1",
               tipo: "",
               tamanho: undefined,
               medida: "",
-              validade: null,
+              validade: undefined,
             })
           }
         >

@@ -7,15 +7,17 @@ const itemDoacaoValidationSchema = z.object({
     .string()
     .trim()
     .refine((val) => !isNaN(parseInt(val, 10)), { message: "Deve ser um número válido" })
-    .transform((val) => parseInt(val, 10)) //Transforma a string em um número.
-    .refine((val) => val >= 1 && val <= 1000, { message: "Deve ser entre 1 e 1000" }),
+    .transform((val) => (typeof val === "string" ? parseInt(val, 10) : String(val)))
+    .refine((val) => Number(val) >= 1 && Number(val) <= 1000, {
+      message: "Deve ser entre 1 e 1000",
+    }),
   tamanho: z.string().trim().optional(),
   medida: z.string().trim().min(1, "Campo obrigatório!"),
   validade: z
     .string()
     .trim()
     .optional()
-    .transform((val) => (val ? new Date(val) : null))
+    .transform((val) => (val ? new Date(val) : undefined))
     .refine((val) => !val || val >= new Date(), { message: "Produto vencido" })
     .refine((val) => !val || !isNaN(val.getTime()), { message: "Data inválida" }),
 });
