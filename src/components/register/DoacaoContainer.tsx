@@ -17,7 +17,7 @@ export default function DoacaoContainer() {
       <FormDoacao query={doadorQuery} openModal={setIsOpen}/>
       {isOpen && (
         <Modal openModal={setIsOpen}>
-          <FormDoador />
+          <FormDoador openModal={setIsOpen} />
         </Modal>
       )}
     </section>

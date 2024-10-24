@@ -1,8 +1,8 @@
 import { catchErrorHandler } from "../common/utils/errorHandler";
 import { responseHandler } from "../common/utils/responseHandler";
-import { Doador } from "../types/doador";
+import { FormDoadorFields } from "../common/validations/formDoadorValidationSchema";
 
-export async function postCriarDoador(data: Doador) {
+export async function postCriarDoador(data: FormDoadorFields) {
   try {
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/doadores`, {
       method: "POST",
@@ -12,7 +12,7 @@ export async function postCriarDoador(data: Doador) {
       },
       body: JSON.stringify(data),
     });
-    return await responseHandler(response, { message: "E-mail enviado com sucesso!" });
+    return await responseHandler(response, { message: "Doador cadastrado com sucesso!" });
   } catch (error) {
     return catchErrorHandler(error);
   }

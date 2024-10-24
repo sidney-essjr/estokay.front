@@ -28,7 +28,7 @@ const SelectableInput = forwardRef<HTMLSelectElement, SelectProps>(
           aria-describedby={error ?? ""}
         >
           {options.map((opt) => (
-            <option key={opt.value} className="text-sm" value={opt.value}>
+            <option key={opt.value} className="text-sm h-12" value={opt.value}>
               {opt.desc}
             </option>
           ))}
