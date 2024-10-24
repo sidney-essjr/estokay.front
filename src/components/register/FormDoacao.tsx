@@ -1,12 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { UseQueryResult } from "react-query";
+import { useMutation, useQueryClient, UseQueryResult } from "react-query";
+import { useNavigate } from "react-router-dom";
 import Loading from "../../assets/svg/Loading";
 import {
   FormDoacaoFields,
   formDoacaoValidationSchema,
 } from "../../common/validations/formDoacaoValidationSchema";
+import { postCriarDoacao } from "../../data/fetchCriarDoacao";
 import { Doador } from "../../types/doador";
 import Button from "../common/Button";
 import Input from "../common/Input";
@@ -52,9 +54,23 @@ export default function FormDoacao({
     control,
     name: "itens",
   });
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const mutation = useMutation(postCriarDoacao, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("doacao");
+    },
+  });
 
-  async function onSubmit() {
-    reset();
+  async function onSubmit(data: FormDoacaoFields) {
+    const response = await mutation.mutateAsync(data);
+    setFetchInfo(response.message);
+    setTimeout(() => {
+      if (response.result) {
+        reset();
+        navigate("/cadastro");
+      }
+    }, 4000);
   }
 
   return (
@@ -63,7 +79,6 @@ export default function FormDoacao({
         <SelectableInput
           id="doador"
           label="Doador*"
-          
           options={data.map((doador) => ({ value: doador.id, desc: doador.nome }))}
           className="col-span-2"
           error={errors.doador?.message}
