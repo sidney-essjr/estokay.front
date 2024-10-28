@@ -144,7 +144,7 @@ export default function FormDoacao({
             error={errors?.itens?.[index]?.validade?.message}
             {...register(`itens.${index}.validade`)}
           />
-          <Button onClick={() => remove(index)}>Remover</Button>
+          <Button className="w-full sm:w-auto" onClick={() => remove(index)}>Remover</Button>
         </div>
       ))}
       <div className="flex space-x-2">

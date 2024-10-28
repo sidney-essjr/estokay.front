@@ -90,7 +90,7 @@ export default function FormVoluntario() {
         {...register("confirmarSenha")}
       />
 
-      <Button className="" type="submit" variant="success" disabled={isSubmitting}>
+      <Button className="w-full md:w-auto" type="submit" variant="success" disabled={isSubmitting}>
         {isSubmitting ? <Loading /> : "Registrar"}
       </Button>
       {fetchInfo !== "" ? (
