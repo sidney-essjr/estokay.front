@@ -8,12 +8,12 @@ import {
   FormDoacaoFields,
   formDoacaoValidationSchema,
 } from "../../common/validations/formDoacaoValidationSchema";
-import { postCriarDoacao } from "../../data/fetchCriarDoacao";
+import { medida, tamanhos, tipos } from "../../data/registerOptions";
+import { postCriarDoacao } from "../../services/fetchCriarDoacao";
 import { Doador } from "../../types/doador";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import SelectableInput from "../common/SelectableInput";
-import { medida, tamanhos, tipos } from "./registerOptions";
 
 export default function FormDoacao({
   query,
@@ -98,12 +98,12 @@ export default function FormDoacao({
       {fields.map((field, index) => (
         <div
           key={field.id}
-          className="grid grid-cols-2 md:grid-cols-4 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm"
+          className="grid sm:grid-cols-2 md:grid-cols-4 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm"
         >
           <Input
             id={`itens.${index}.descricao`}
             label="Descricao*"
-            className="col-span-2"
+            className="sm:col-span-2"
             error={errors?.itens?.[index]?.descricao?.message}
             {...register(`itens.${index}.descricao`)}
           />
@@ -169,11 +169,11 @@ export default function FormDoacao({
         </Button>
       </div>
       {fetchInfo !== "" ? (
-        <p className="h-9 pt-9 text-center text-sm text-detail-color">{fetchInfo}</p>
+        <p className="h-9 text-center text-sm text-detail-color">{fetchInfo}</p>
       ) : errors.itens?.message ? (
-        <p className="h-9 pt-9 text-center text-sm text-detail-color">{errors.itens?.message}</p>
+        <p className="h-9  text-center text-sm text-detail-color">{errors.itens?.message}</p>
       ) : (
-        <p className="h-9 pt-9"></p>
+        <p className="h-9 "></p>
       )}
     </form>
   );

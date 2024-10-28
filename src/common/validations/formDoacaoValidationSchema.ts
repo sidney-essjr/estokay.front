@@ -6,7 +6,7 @@ const itemDoacaoValidationSchema = z.object({
   quantidade: z
     .string()
     .trim()
-    .refine((val) => !isNaN(parseInt(val, 10)), { message: "Deve ser um número válido" })
+    .refine((val) => !isNaN(parseInt(val, 10)), { message: "Valor válido" })
     .transform((val) => (typeof val === "string" ? parseInt(val, 10) : String(val)))
     .refine((val) => Number(val) >= 1 && Number(val) <= 1000, {
       message: "Deve ser entre 1 e 1000",

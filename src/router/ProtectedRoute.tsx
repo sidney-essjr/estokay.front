@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Funcao } from "../common/enums/enumFuncao";
 import { sessionLogin } from "../common/utils/sessionLogin";
@@ -11,11 +11,11 @@ export default function ProtectedRoute({
   funcaoRequerida?: Funcao;
 }) {
   const navigate = useNavigate();
+  const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
     async function handleSessionLogin() {
       const response = await sessionLogin();
-
       const result = response?.result;
 
       if (!result || typeof result !== "object") {
@@ -25,10 +25,13 @@ export default function ProtectedRoute({
 
       if (result.funcao < funcaoRequerida.valueOf()) {
         navigate("/nao-autorizado");
+        return;
       }
     }
     handleSessionLogin();
+
+    setAllowed(true);
   }, [funcaoRequerida, navigate]);
 
-  return children;
+  if (allowed) return children;
 }

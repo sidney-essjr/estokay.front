@@ -7,12 +7,12 @@ import {
   FormDoadorFields,
   formDoadorSchemaValidation,
 } from "../../common/validations/formDoadorValidationSchema";
-import { getCepInfo } from "../../data/fetchCepInfo";
-import { postCriarDoador } from "../../data/fetchCriarDoador";
+import { uf } from "../../data/registerOptions";
+import { getCepInfo } from "../../services/fetchCepInfo";
+import { postCriarDoador } from "../../services/fetchCriarDoador";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import SelectableInput from "../common/SelectableInput";
-import { uf } from "./registerOptions";
 
 export default function FormDoador({ openModal }: { openModal: (open: boolean) => void }) {
   const {

@@ -1,26 +1,15 @@
 import { createContext, ReactNode, useState } from "react";
+import { Voluntario } from "../../types/voluntario";
 
-export type DataVonlutario = {
-  id: string;
-  nome: string;
-  email: string;
-  telefone: string;
-  documento: string;
-  ativo: boolean;
-  funcao: string;
-};
+type DataVoluntarioContextProps = {
+  dataVoluntario: Voluntario | null;
+  setDataVoluntario: (data: Voluntario) => void;
+} | null;
 
-type DataVoluntarioContextProps =
-  | {
-      dataVoluntario: DataVonlutario | object;
-      setDataVoluntario: (data: DataVonlutario) => void;
-    }
-  | object;
-
-export const DataVoluntarioContext = createContext<DataVoluntarioContextProps>({});
+export const DataVoluntarioContext = createContext<DataVoluntarioContextProps>(null);
 
 export default function DataVoluntarioContextProvider({ children }: { children: ReactNode }) {
-  const [dataVoluntario, setDataVoluntario] = useState<DataVonlutario | object>({});
+  const [dataVoluntario, setDataVoluntario] = useState<Voluntario | null>(null);
 
   return (
     <DataVoluntarioContext.Provider value={{ dataVoluntario, setDataVoluntario }}>

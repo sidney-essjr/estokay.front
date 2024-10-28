@@ -7,7 +7,7 @@ import {
 } from "../../../common/validations/formEsqueceuSenhaValidationSchema";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
-import { postEsqueceuSenha } from "../../../data/fetchEsqueceuSenha";
+import { postEsqueceuSenha } from "../../../services/fetchEsqueceuSenha";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

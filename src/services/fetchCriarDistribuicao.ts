@@ -1,10 +1,10 @@
 import { catchErrorHandler } from "../common/utils/errorHandler";
 import { responseHandler } from "../common/utils/responseHandler";
-import { FormDoacaoFields } from "../common/validations/formDoacaoValidationSchema";
+import { Distribuicao } from "../types/distribuicao";
 
-export async function postCriarDoacao(data: FormDoacaoFields) {
+export async function postCriarDistribuicao(data: Distribuicao) {
   try {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/doacoes`, {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/distribuicoes`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -12,7 +12,7 @@ export async function postCriarDoacao(data: FormDoacaoFields) {
       },
       body: JSON.stringify(data),
     });
-    return await responseHandler(response, { message: "Doação cadastrada com sucesso!" });
+    return await responseHandler(response, { message: "Distribuição registrada com sucesso!" });
   } catch (error) {
     return catchErrorHandler(error);
   }

@@ -1,9 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Funcao } from "../common/enums/enumFuncao";
 import AccessLayout from "../layouts/AccessLayout";
 import LayoutHomeLogado from "../layouts/LayoutHomeLogado";
 import RootLayout from "../layouts/RootLayout";
 import AcessoNaoAutorizadoPage from "../pages/AcessoNaoAutorizadoPage";
+import CadastroDistribuicaoPage from "../pages/CadastroDistribuicaoPage";
+import CadastroDoacaoPage from "../pages/CadastroDoacaoPage";
 import CadastroPage from "../pages/CadastroPage";
+import CadastroVoluntarioPage from "../pages/CadastroVoluntarioPage";
 import EsqueceuSenhaPage from "../pages/EsqueceuSenhaPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
@@ -20,7 +24,7 @@ const router = createBrowserRouter([
       {
         path: "cadastro",
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute funcaoRequerida={Funcao.USUARIO}>
             <LayoutHomeLogado>
               <CadastroPage />
             </LayoutHomeLogado>
@@ -28,9 +32,39 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "perfil",
+        path: "cadastro/doacao",
+        element: (
+          <ProtectedRoute funcaoRequerida={Funcao.USUARIO}>
+            <LayoutHomeLogado>
+              <CadastroDoacaoPage />
+            </LayoutHomeLogado>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "cadastro/voluntario",
         element: (
           <ProtectedRoute>
+            <LayoutHomeLogado>
+              <CadastroVoluntarioPage />
+            </LayoutHomeLogado>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "cadastro/distribuicao",
+        element: (
+          <ProtectedRoute>
+            <LayoutHomeLogado>
+              <CadastroDistribuicaoPage />
+            </LayoutHomeLogado>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "perfil",
+        element: (
+          <ProtectedRoute funcaoRequerida={Funcao.USUARIO}>
             <LayoutHomeLogado>Perfil</LayoutHomeLogado>
           </ProtectedRoute>
         ),

@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { postSessionLogin } from "../../data/fetchSessionLogin";
+import { postSessionLogin } from "../../services/fetchSessionLogin";
 
 export async function sessionLogin() {
   const token = Cookies.get("accessToken");

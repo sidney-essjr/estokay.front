@@ -9,7 +9,7 @@ import {
 } from "../../../common/validations/formRedefinirSenhaValidationSchema";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
-import { postRedefinirSenha } from "../../../data/fetchRedefinirSenha";
+import { postRedefinirSenha } from "../../../services/fetchRedefinirSenha";
 
 export default function FormRedefinirSenha() {
   const {

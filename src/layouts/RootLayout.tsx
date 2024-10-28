@@ -4,11 +4,12 @@ import LogoutSVG from "../assets/svg/LogoutSVG";
 import PadlockSVG from "../assets/svg/PadlockSVG";
 import { sessionLogin } from "../common/utils/sessionLogin";
 import Sidebar from "../components/sidebar/SidebarContainer";
+import { useDataVoluntario } from "../hooks/useDataVoluntario";
 
 export default function RootLayout() {
   const [acesso, setAcesso] = useState({ logado: false, nome: "acessar" });
   const [atHome, setAtHome] = useState(true);
-
+  const dataVoluntario = useDataVoluntario();
   const location = useLocation();
 
   useEffect(() => {
@@ -18,12 +19,14 @@ export default function RootLayout() {
       const response = await sessionLogin();
       const result = response?.result;
       if (result && typeof result === "object") {
+        dataVoluntario?.setDataVoluntario(result);
         setAcesso({ logado: true, nome: result.nome.split(" ")[0] });
       } else {
         setAcesso({ logado: false, nome: "acessar" });
       }
     }
     handleSessionLogin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (
@@ -48,7 +51,9 @@ export default function RootLayout() {
           )}
         </div>
       </header>
-      <section className={` ${!atHome ? "sm:h-[calc(100vh-128px)] relative bg-logo-gray-color" : "block"}  `}>
+      <section
+        className={`${!atHome ? "sm:h-[calc(100vh-128px)] relative bg-logo-gray-color" : "block"}`}
+      >
         {!atHome && <Sidebar />}
         <Outlet />
       </section>

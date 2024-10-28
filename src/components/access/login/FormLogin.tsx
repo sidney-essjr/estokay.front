@@ -7,7 +7,7 @@ import {
   FormLoginFields,
   formLoginValidationSchema,
 } from "../../../common/validations/formLoginValidationSchema";
-import { postLogin } from "../../../data/fetchFormLogin";
+import { postLogin } from "../../../services/fetchFormLogin";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
 

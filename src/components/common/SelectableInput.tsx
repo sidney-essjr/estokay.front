@@ -4,7 +4,7 @@ type SelectProps = ComponentPropsWithRef<"select"> & {
   id: string;
   label: string;
   error?: string;
-  options: { value: string | number; desc: string }[];
+  options: { value: any; desc: string }[];
   className?: string;
 };
 
@@ -27,8 +27,11 @@ const SelectableInput = forwardRef<HTMLSelectElement, SelectProps>(
           aria-invalid={!!error}
           aria-describedby={error ?? ""}
         >
+          <option key={0} className="text-sm p-2" value={""}>
+            SELECIONE
+          </option>
           {options.map((opt) => (
-            <option key={opt.value} className="text-sm h-12" value={opt.value}>
+            <option key={opt.value} className="text-sm p-2" value={opt.value}>
               {opt.desc}
             </option>
           ))}

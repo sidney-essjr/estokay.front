@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQueries } from "react-query";
-import { getLerDoadores } from "../../data/fetchLerDoadores";
+import { getLerDoadores } from "../../services/fetchLerDoadores";
 import Modal from "../common/Modal";
 import FormDoacao from "./FormDoacao";
 import FormDoador from "./FormDoador";
@@ -12,9 +12,11 @@ export default function DoacaoContainer() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="m-auto max-w-[1200px]">
-      <Title><h1>Cadastro de Doação</h1></Title>
-      <FormDoacao query={doadorQuery} openModal={setIsOpen}/>
+    <section className="m-auto max-w-[1000px]">
+      <Title>
+        <h1>Cadastro de Doação</h1>
+      </Title>
+      <FormDoacao query={doadorQuery} openModal={setIsOpen} />
       {isOpen && (
         <Modal openModal={setIsOpen}>
           <FormDoador openModal={setIsOpen} />
