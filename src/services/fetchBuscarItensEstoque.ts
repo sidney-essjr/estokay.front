@@ -2,18 +2,18 @@ import { catchErrorHandler } from "../common/utils/errorHandler";
 import { responseHandler } from "../common/utils/responseHandler";
 import { ItemDoacao } from "../types/ItemDoacao";
 
-export async function getLerItemPorTipo(tipo: string) {
+export async function getBuscarItensEstoque(params = {}) {
+  const url = new URL(`${import.meta.env.VITE_BASE_URL}/estoque/buscar`);
+  url.search = new URLSearchParams(params).toString();
+
   try {
-    const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/doacoes/buscar-item-por-tipo/${tipo}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      }
-    );
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
 
     let result;
 

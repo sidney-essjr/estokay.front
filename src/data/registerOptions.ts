@@ -1,25 +1,26 @@
-export const tipos = [
-  { value: "alimento", desc: "ALIMENTO" },
-  { value: "briquedo", desc: "BRINQUEDO" },
-  { value: "higiene", desc: "HIGIENE" },
-  { value: "doméstico", desc: "UTENSÍLIO DOMÉSTICO" },
-  { value: "vestuário", desc: "VESTUÁRIO" },
-  { value: "outros", desc: "OUTROS" },
+export const categorias = [
+  { value: "Alimento", desc: "ALIMENTO" },
+  { value: "Briquedo", desc: "BRINQUEDO" },
+  { value: "Higiene", desc: "HIGIENE" },
+  { value: "Doméstico", desc: "UTENSÍLIO DOMÉSTICO" },
+  { value: "Vestuário", desc: "VESTUÁRIO" },
+  { value: "Outros", desc: "OUTROS" },
 ];
 
 export const tamanhos = [
   { value: "N/A", desc: "N/A" },
-  { value: "pequeno", desc: "PEQUENO" },
-  { value: "médio", desc: "MÉDIO" },
-  { value: "grande", desc: "GRANDE" },
-  { value: "ex. grande", desc: "EX. GRANDE" },
+  { value: "Pequeno", desc: "PEQUENO" },
+  { value: "Médio", desc: "MÉDIO" },
+  { value: "Grande", desc: "GRANDE" },
+  { value: "Ext. Grande", desc: "EX. GRANDE" },
 ];
 
 export const medida = [
-  { value: "Kg", desc: "KG" },
-  { value: "litro", desc: "LITRO" },
-  { value: "peça", desc: "PEÇA" },
-  { value: "unidade", desc: "UNIDADE" },
+  { value: "KG", desc: "KG" },
+  { value: "Litro", desc: "LITRO" },
+  { value: "Peça", desc: "PEÇA" },
+  { value: "Pacote", desc: "PACOTE" },
+  { value: "Unidade", desc: "UNIDADE" },
 ];
 
 export const uf = [

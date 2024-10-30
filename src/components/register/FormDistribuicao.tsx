@@ -1,20 +1,20 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import Loading from "../../assets/svg/Loading";
 import {
   FormDistribuicaoFields,
   formDistribuicaoValidationSchema,
 } from "../../common/validations/formDistribuicaoValidationSchema";
-import { tipos } from "../../data/registerOptions";
+import { categorias } from "../../data/registerOptions";
 import { postCriarDistribuicao } from "../../services/fetchCriarDistribuicao";
-import { getLerItemPorTipo } from "../../services/fetchLerItemPorTipo";
 import { ItemDoacao } from "../../types/ItemDoacao";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import SelectableInput from "../common/SelectableInput";
 import { ItemDistribuicao } from "./DistribuicaoContainer";
+import { getBuscarItensEstoque } from "../../services/fetchBuscarItensEstoque";
 
 export default function FormDistribuicao({
   itens,
@@ -28,15 +28,13 @@ export default function FormDistribuicao({
     register,
     reset,
     getValues,
-    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormDistribuicaoFields>({
     resolver: zodResolver(formDistribuicaoValidationSchema),
   });
 
-  const tipo = useWatch<FormDistribuicaoFields>({ control, name: "tipo" });
-  const [itensPorTipo, setItensPorTipo] = useState<ItemDoacao[]>([]);
+  const [data, setData] = useState<ItemDoacao[]>([]);
   const queryClient = useQueryClient();
   const mutation = useMutation(postCriarDistribuicao, {
     onSuccess: () => {
@@ -44,10 +42,10 @@ export default function FormDistribuicao({
     },
   });
   const [quantidadePorItem, setQuantidadePorItem] = useState<{ value: number; desc: string }[]>([]);
-  useQuery(["itensDoacao", tipo], () => getLerItemPorTipo(String(tipo)), {
-    enabled: !!tipo,
+  const [descItem, setDescItem] = useState<{ value: string; desc: string }[]>([]);
+  useQuery(["itensDoacao"], () => getBuscarItensEstoque(), {
     onSuccess: (data) => {
-      setItensPorTipo(
+      setData(
         typeof data.result === "object" ? data.result.filter((item) => item.quantidade > 0) : []
       );
     },
@@ -55,7 +53,7 @@ export default function FormDistribuicao({
 
   function changeQuantity(e: HTMLSelectElement["value"]) {
     const id = Number(e.split(" ")[0]);
-    const quantidade = itensPorTipo.find((item) => item.id === id)?.quantidade;
+    const quantidade = data.find((item) => item.id === id)?.quantidade;
     if (quantidade && !isNaN(quantidade)) {
       const options = [];
       for (let index = 1; index <= quantidade; index++) {
@@ -65,13 +63,23 @@ export default function FormDistribuicao({
     }
   }
 
-  function addItem() {
-    const { tipo, descricao, quantidade } = getValues();
+  function changeDesc(categoria: HTMLSelectElement["value"]) {
+    const itens = data.filter((item) => item.categoria === categoria);
+    const options: { value: string; desc: string }[] = [];
+    itens.forEach((item) => {
+      options.push({ value: `${item.id} ${item.descricao}`, desc: item.descricao });
+    });
 
-    if (tipo && descricao && quantidade) {
+    setDescItem(options);
+  }
+
+  function addItem() {
+    const { categoria, descricao, quantidade } = getValues();
+
+    if (categoria && descricao && quantidade) {
       const id = Number(descricao.split(" ")[0]);
       if (!itens.find((item) => item.id === id)) {
-        setItens((prev) => [...prev, { id, tipo, descricao, quantidade }]);
+        setItens((prev) => [...prev, { id, categoria, descricao, quantidade }]);
       } else {
         setInfoMessage(
           "Objeto ja consta na lista de itens, para alterar a quantidade remova e adicione novamente"
@@ -127,20 +135,18 @@ export default function FormDistribuicao({
       </div>
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-5 border border-logo-gray-color sm:p-4 p-2 rounded-sm">
         <SelectableInput
-          id={"tipo"}
-          label="Tipo*"
-          options={tipos}
-          error={errors.tipo?.message}
-          {...register("tipo")}
+          id={"categoria"}
+          label="Categoria*"
+          options={categorias}
+          error={errors.categoria?.message}
+          {...register("categoria")}
+          onChange={(e) => changeDesc(e.currentTarget.value)}
         />
         <SelectableInput
           id={"descricao"}
           className="lg:col-span-2"
           label="Descrição*"
-          options={itensPorTipo.map((item) => ({
-            value: `${item.id} ${item.descricao}`,
-            desc: item.descricao,
-          }))}
+          options={descItem}
           error={errors.descricao?.message}
           {...register("descricao")}
           onChange={(e) => changeQuantity(e.currentTarget.value)}

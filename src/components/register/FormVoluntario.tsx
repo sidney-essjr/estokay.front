@@ -41,58 +41,61 @@ export default function FormVoluntario() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      noValidate
-      className="grid grid-cols-1 md:grid-cols-3 gap-2"
-    >
-      <Input
-        className="md:col-span-2"
-        id="nome"
-        label="Nome*"
-        error={errors.nome?.message}
-        {...register("nome")}
-      />
-      <Input
-        id="telefone"
-        label="Telefone"
-        error={errors.telefone?.message}
-        {...register("telefone")}
-      />
-      <Input
-        id="email"
-        type="email"
-        label="Email*"
-        className="md:col-span-2"
-        error={errors.email?.message}
-        {...register("email")}
-      />
-      <Input
-        id="documento"
-        label="Documento*"
-        error={errors.documento?.message}
-        {...register("documento")}
-      />
-      <Input
-        id="senha"
-        type="password"
-        className="md:col-span-2"
-        label="Senha*"
-        error={errors.senha?.message}
-        {...register("senha")}
-      />
-      <Input
-        id="confirmarSenha"
-        type="password"
-        label="Confirmar Senha*"
-        className="md:col-span-2"
-        error={errors.confirmarSenha?.message}
-        {...register("confirmarSenha")}
-      />
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm">
+        <Input
+          className="md:col-span-2"
+          id="nome"
+          label="Nome*"
+          error={errors.nome?.message}
+          {...register("nome")}
+        />
+        <Input
+          id="telefone"
+          label="Telefone"
+          error={errors.telefone?.message}
+          {...register("telefone")}
+        />
+        <Input
+          id="email"
+          type="email"
+          label="Email*"
+          className="md:col-span-2"
+          error={errors.email?.message}
+          {...register("email")}
+        />
+        <Input
+          id="documento"
+          label="Documento*"
+          error={errors.documento?.message}
+          {...register("documento")}
+        />
+        <Input
+          id="senha"
+          type="password"
+          className="md:col-span-2"
+          label="Senha*"
+          error={errors.senha?.message}
+          {...register("senha")}
+        />
+        <Input
+          id="confirmarSenha"
+          type="password"
+          label="Confirmar Senha*"
+          className="md:col-span-2"
+          error={errors.confirmarSenha?.message}
+          {...register("confirmarSenha")}
+        />
 
-      <Button className="w-full md:w-auto" type="submit" variant="success" disabled={isSubmitting}>
-        {isSubmitting ? <Loading /> : "Registrar"}
-      </Button>
+        <Button
+          className="w-full md:w-auto"
+          type="submit"
+          variant="success"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? <Loading /> : "Registrar"}
+        </Button>
+      </div>
       {fetchInfo !== "" ? (
         <p className="h-9 text-center text-sm text-detail-color">{fetchInfo}</p>
       ) : (

@@ -9,20 +9,18 @@ export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Função para expandir a sidebar após 1 segundo
   const handleMouseEnter = () => {
     timerRef.current = setTimeout(() => {
-      setIsExpanded(true); // Expande após 1 segundo
-    }, 1000); // 1000 ms = 1 segundo
+      setIsExpanded(true);
+    }, 500);
   };
 
-  // Função para cancelar a expansão caso o mouse saia antes do tempo
   const handleMouseLeave = () => {
     if (timerRef.current) {
-      clearTimeout(timerRef.current); // Cancela o timeout
+      clearTimeout(timerRef.current);
       timerRef.current = null;
     }
-    setIsExpanded(false); // Colapsa a sidebar ao sair
+    setIsExpanded(false);
   };
 
   return (
@@ -40,7 +38,12 @@ export default function Sidebar() {
           desc="Cadastro"
           path="/cadastro"
         />
-        <SidebarItem icon={<ListItemsSVG />} isExpanded={isExpanded} desc="Itens" path="/estoque" />
+        <SidebarItem
+          icon={<ListItemsSVG />}
+          isExpanded={isExpanded}
+          desc="Estoque"
+          path="/estoque"
+        />
         <SidebarItem
           icon={<ReportSVG />}
           isExpanded={isExpanded}

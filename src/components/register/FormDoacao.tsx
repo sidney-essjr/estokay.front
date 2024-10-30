@@ -8,7 +8,7 @@ import {
   FormDoacaoFields,
   formDoacaoValidationSchema,
 } from "../../common/validations/formDoacaoValidationSchema";
-import { medida, tamanhos, tipos } from "../../data/registerOptions";
+import { categorias, medida, tamanhos } from "../../data/registerOptions";
 import { postCriarDoacao } from "../../services/fetchCriarDoacao";
 import { Doador } from "../../types/doador";
 import Button from "../common/Button";
@@ -40,7 +40,7 @@ export default function FormDoacao({
         {
           descricao: undefined,
           quantidade: undefined,
-          tipo: undefined,
+          categoria: undefined,
           tamanho: "N/A",
           medida: undefined,
           validade: undefined,
@@ -58,7 +58,7 @@ export default function FormDoacao({
   const queryClient = useQueryClient();
   const mutation = useMutation(postCriarDoacao, {
     onSuccess: () => {
-      queryClient.invalidateQueries("doacao");
+      queryClient.invalidateQueries("itensDoacao");
     },
   });
 
@@ -117,11 +117,11 @@ export default function FormDoacao({
             {...register(`itens.${index}.quantidade`)}
           />
           <SelectableInput
-            id={`itens.${index}.tipo`}
-            label="Tipo*"
-            options={tipos}
-            error={errors?.itens?.[index]?.tipo?.message}
-            {...register(`itens.${index}.tipo`)}
+            id={`itens.${index}.categoria`}
+            label="Categoria*"
+            options={categorias}
+            error={errors?.itens?.[index]?.categoria?.message}
+            {...register(`itens.${index}.categoria`)}
           />
           <SelectableInput
             id={`itens.${index}.tamanho`}
@@ -144,7 +144,9 @@ export default function FormDoacao({
             error={errors?.itens?.[index]?.validade?.message}
             {...register(`itens.${index}.validade`)}
           />
-          <Button className="w-full sm:w-auto" onClick={() => remove(index)}>Remover</Button>
+          <Button className="w-full sm:w-auto" onClick={() => remove(index)}>
+            Remover
+          </Button>
         </div>
       ))}
       <div className="flex space-x-2">
@@ -155,7 +157,7 @@ export default function FormDoacao({
             append({
               descricao: "",
               quantidade: "1",
-              tipo: "",
+              categoria: "",
               tamanho: undefined,
               medida: "",
               validade: undefined,

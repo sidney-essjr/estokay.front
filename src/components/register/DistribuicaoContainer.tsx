@@ -4,7 +4,7 @@ import TabelaItensSelecionados from "./TabelaItensSelecionados";
 
 export type ItemDistribuicao = {
   id: number;
-  tipo: string;
+  categoria: string;
   descricao: string;
   quantidade: number | string;
 };

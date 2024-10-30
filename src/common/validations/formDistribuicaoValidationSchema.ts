@@ -7,7 +7,7 @@ export const formDistribuicaoValidationSchema = z.object({
     .string()
     .min(1, "Campo obrigatório!")
     .refine(isValidCPF, { message: "CPF inválido" }),
-  tipo: z.string().trim().optional(),
+  categoria: z.string().trim().optional(),
   descricao: z.string().trim().optional(),
   quantidade: z
     .string()

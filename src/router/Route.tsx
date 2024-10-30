@@ -9,6 +9,7 @@ import CadastroDoacaoPage from "../pages/CadastroDoacaoPage";
 import CadastroPage from "../pages/CadastroPage";
 import CadastroVoluntarioPage from "../pages/CadastroVoluntarioPage";
 import EsqueceuSenhaPage from "../pages/EsqueceuSenhaPage";
+import EstoquePage from "../pages/EstoquePage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RedefinirSenhaPage from "../pages/RedefinirSenhaPage";
@@ -57,6 +58,26 @@ const router = createBrowserRouter([
           <ProtectedRoute>
             <LayoutHomeLogado>
               <CadastroDistribuicaoPage />
+            </LayoutHomeLogado>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/estoque",
+        element: (
+          <ProtectedRoute>
+            <LayoutHomeLogado>
+              <EstoquePage />
+            </LayoutHomeLogado>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/relatorio",
+        element: (
+          <ProtectedRoute>
+            <LayoutHomeLogado>
+              <EstoquePage />
             </LayoutHomeLogado>
           </ProtectedRoute>
         ),
