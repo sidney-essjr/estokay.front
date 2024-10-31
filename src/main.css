@@ -11,7 +11,7 @@ body {
   --logo-gray-color: #a6a6a6;
   --success-color: #168821;
   --attention-color: #ffcd07;
-  --neutral-color: #4169E1;
+  --neutral-color: #4169e1;
   --detail-color: #fb3b2e;
 }
 
@@ -25,5 +25,18 @@ body {
   to {
     opacity: 1;
     transform: initial;
+  }
+}
+
+.zoomIn {
+  opacity: 0;
+  transform: scale(0.8);
+  animation: zoomIn 0.3s forwards;
+}
+
+@keyframes zoomIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

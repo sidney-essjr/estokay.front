@@ -1,47 +1,97 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { sortItens } from "../../common/utils/sortItens";
 import { ItemDoacao } from "../../types/ItemDoacao";
 import Button from "../common/Button";
+import TableHeader from "./TableHeader";
 
 export default function TabelaItensEstoque({
   itens,
   setItens,
+  setIsOpen,
+  setUpdatedItem,
 }: {
   itens: ItemDoacao[];
   setItens: Dispatch<SetStateAction<ItemDoacao[]>>;
+  setIsOpen: Dispatch<React.SetStateAction<boolean>>;
+  setUpdatedItem: Dispatch<SetStateAction<ItemDoacao>>;
 }) {
-  function remover(id: number) {
-    const itensExibidos = itens.filter((item) => item.id !== id);
-    setItens(itensExibidos);
-  }
+  const [order, setOrder] = useState<{ order: "asc" | "desc"; key: keyof ItemDoacao }>({
+    order: "asc",
+    key: "categoria",
+  });
+
+  useEffect(() => {
+    const reordered = sortItens([...itens], order.key, order.order);
+    setItens(reordered);
+  }, [order, setItens]);
 
   return (
     <section className="w-full overflow-auto max-h-96">
-      <table className="w-full min-w-[600px] p-2 h-12 justify-around border border-logo-gray-color">
+      <table className="w-full min-w-[600px] p-2 h-12 justify-around">
         <thead>
-          <tr className="w-full p-2 h-12 text-center border border-logo-gray-color font-bold text-logo-gray-color">
-            <th scope="col" className="p-2 h-12 w-20 border border-logo-gray-color">
-              EDITAR
+          <tr className="w-full h-12 text-center font-bold text-logo-gray-color">
+            <th scope="col" className=" w-24 border border-logo-gray-color">
+              <TableHeader>EDITAR</TableHeader>
             </th>
-            <th scope="col" className="p-2 h-12 border border-logo-gray-color">
-              COD.
+            <th scope="col" className="border border-logo-gray-color">
+              <TableHeader
+                objectKey="id"
+                currentFiltered={order.key}
+                changeOrdering={setOrder}
+                scope="col"
+              >
+                COD.
+              </TableHeader>
             </th>
-            <th scope="col" className="p-2 h-12 border border-logo-gray-color">
-              CATEGORIA
+            <th scope="col" className="border border-logo-gray-color">
+              <TableHeader
+                objectKey="categoria"
+                currentFiltered={order.key}
+                changeOrdering={setOrder}
+              >
+                CATEGORIA
+              </TableHeader>
             </th>
-            <th scope="col" className="p-2 h-12 border border-logo-gray-color">
-              DESCRIÇÃO
+            <th scope="col" className="border border-logo-gray-color">
+              <TableHeader
+                objectKey="descricao"
+                currentFiltered={order.key}
+                changeOrdering={setOrder}
+              >
+                DESCRIÇÃO
+              </TableHeader>
             </th>
-            <th scope="col" className="p-2 h-12 border border-logo-gray-color">
-              TAMANHO
+            <th scope="col" className="border border-logo-gray-color">
+              <TableHeader
+                objectKey="tamanho"
+                currentFiltered={order.key}
+                changeOrdering={setOrder}
+              >
+                TAMANHO
+              </TableHeader>
             </th>
-            <th scope="col" className="p-2 h-12 border border-logo-gray-color">
-              MEDIDA
+            <th scope="col" className="border border-logo-gray-color">
+              <TableHeader objectKey="medida" currentFiltered={order.key} changeOrdering={setOrder}>
+                MEDIDA
+              </TableHeader>
             </th>
-            <th scope="col" className="p-2 h-12 border border-logo-gray-color">
-              VALIDADE
+            <th scope="col" className="border border-logo-gray-color">
+              <TableHeader
+                objectKey="validade"
+                currentFiltered={order.key}
+                changeOrdering={setOrder}
+              >
+                VALIDADE
+              </TableHeader>
             </th>
-            <th scope="col" className="p-2 h-12 border border-logo-gray-color">
-              QUANTIDADE
+            <th scope="col" className="border border-logo-gray-color">
+              <TableHeader
+                objectKey="quantidade"
+                currentFiltered={order.key}
+                changeOrdering={setOrder}
+              >
+                QUANTIDADE
+              </TableHeader>
             </th>
           </tr>
         </thead>
@@ -49,7 +99,14 @@ export default function TabelaItensEstoque({
           {itens.map((item) => (
             <tr key={item.id}>
               <td className="p-2 h-12 border border-logo-gray-color">
-                <Button className=" w-14 h-8" variant="none" onClick={() => remover(item.id)}>
+                <Button
+                  onClick={() => {
+                    setIsOpen(true);
+                    setUpdatedItem(item);
+                  }}
+                  className="w-full m-0 h-8"
+                  variant="none"
+                >
                   Editar
                 </Button>
               </td>
@@ -58,8 +115,12 @@ export default function TabelaItensEstoque({
               <td className="p-2 h-12 border border-logo-gray-color">{item.descricao}</td>
               <td className="p-2 h-12 border border-logo-gray-color">{item.tamanho}</td>
               <td className="p-2 h-12 border border-logo-gray-color">{item.medida}</td>
-              <td className="p-2 text-center h-12 border border-logo-gray-color">{item.validade.toString()}</td>
-              <td className="p-2 text-center h-12 border border-logo-gray-color">{item.quantidade}</td>
+              <td className="p-2 text-center h-12 border border-logo-gray-color">
+                {item.validade.toString()}
+              </td>
+              <td className="p-2 text-center h-12 border border-logo-gray-color">
+                {item.quantidade}
+              </td>
             </tr>
           ))}
           <tr className="font-bold text-logo-gray-color">

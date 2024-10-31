@@ -18,7 +18,7 @@ export default function DoacaoContainer() {
       </Title>
       <FormDoacao query={doadorQuery} openModal={setIsOpen} />
       {isOpen && (
-        <Modal openModal={setIsOpen}>
+        <Modal title="Cadastro de Doador" openModal={setIsOpen}>
           <FormDoador openModal={setIsOpen} />
         </Modal>
       )}
