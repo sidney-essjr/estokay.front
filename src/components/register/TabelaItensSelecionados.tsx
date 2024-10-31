@@ -38,12 +38,14 @@ export default function TabelaItensSelecionados({
         <tbody>
           {itens.map((item) => (
             <tr key={item.id}>
-              <td className="p-2 h-12 border border-logo-gray-color">{item.id}</td>
+              <td className="p-2 h-12 border border-logo-gray-color text-center">{item.id}</td>
               <td className="p-2 h-12 border border-logo-gray-color">{item.categoria}</td>
               <td className="p-2 h-12 border border-logo-gray-color">
                 {item.descricao.split(" ").pop()}
               </td>
-              <td className="p-2 h-12 border border-logo-gray-color">{item.quantidade}</td>
+              <td className="p-2 h-12 border border-logo-gray-color text-center">
+                {item.quantidade}
+              </td>
               <td className="p-2 h-12 border border-logo-gray-color">
                 <Button className="w-[110px] h-8" onClick={() => remover(item.id)}>
                   Remover
@@ -55,7 +57,7 @@ export default function TabelaItensSelecionados({
             <td colSpan={3} className="p-2 h-12 border border-logo-gray-color">
               TOTAL
             </td>
-            <td className="p-2 h-12 border border-logo-gray-color">{itens.length}</td>
+            <td className="p-2 h-12 border border-logo-gray-color text-center">{itens.length}</td>
             <td className="p-2 h-12 border border-logo-gray-color">
               <Button className="w-[110px] h-8" onClick={() => setItens([])}>
                 Limpar

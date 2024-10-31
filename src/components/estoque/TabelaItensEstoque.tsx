@@ -13,7 +13,7 @@ export default function TabelaItensEstoque({
   itens: ItemDoacao[];
   setItens: Dispatch<SetStateAction<ItemDoacao[]>>;
   setIsOpen: Dispatch<React.SetStateAction<boolean>>;
-  setUpdatedItem: Dispatch<SetStateAction<ItemDoacao>>;
+  setUpdatedItem: Dispatch<SetStateAction<ItemDoacao | undefined>>;
 }) {
   const [order, setOrder] = useState<{ order: "asc" | "desc"; key: keyof ItemDoacao }>({
     order: "asc",

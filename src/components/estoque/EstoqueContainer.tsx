@@ -8,7 +8,7 @@ import TabelaItensEstoque from "./TabelaItensEstoque";
 export default function EstoqueContainer() {
   const [data, setData] = useState<ItemDoacao[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [updatedItem, setUpdatedItem] = useState<ItemDoacao | object>({});
+  const [updatedItem, setUpdatedItem] = useState<ItemDoacao>();
   return (
     <section>
       <EstoqueForm setData={setData} />
@@ -20,7 +20,7 @@ export default function EstoqueContainer() {
       />
       {isOpen && (
         <Modal title="Atualizar Item" openModal={setIsOpen}>
-          <FormAtualizarItem item={updatedItem} />
+          {updatedItem && <FormAtualizarItem openModal={setIsOpen} item={updatedItem} />}
         </Modal>
       )}
     </section>

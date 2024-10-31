@@ -33,15 +33,11 @@ export default function EstoqueForm({
   const { data, refetch, isRefetching } = useQuery(
     ["itensDoacao"],
     () => getBuscarItensEstoque(getValues()),
-    {
-      enabled: false,
-    }
   );
 
   useEffect(() => {
     if (data && data?.result && Array.isArray(data.result) && data.result.length > 0) {
       setData(data.result);
-      reset();
     } else {
       setInfoMessage(data?.message);
     }
@@ -73,7 +69,7 @@ export default function EstoqueForm({
         <SelectableInput id="tamanho" label="Tamanho" options={tamanhos} {...register("tamanho")} />
         <Input id="validade" label="Valido até" type="date" {...register("validade")} />
         <Button
-          className="w-full md:w-auto"
+          className="w-full md:w-[118px]"
           type="submit"
           variant="neutral"
           disabled={isSubmitting}

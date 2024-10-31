@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const itemDoacaoValidationSchema = z.object({
+export const itemDoacaoValidationSchema = z.object({
   descricao: z.string().trim().min(1, "Campo obrigatório!"),
   categoria: z.string().trim().min(1, "Campo obrigatório!"),
   quantidade: z

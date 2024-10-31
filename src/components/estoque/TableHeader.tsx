@@ -34,6 +34,7 @@ export default function TableHeader({
     if (changeOrdering && objectKey) {
       changeOrdering({ order, key: objectKey });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order]);
 
   return (
