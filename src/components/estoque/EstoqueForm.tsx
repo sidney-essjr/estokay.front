@@ -24,7 +24,6 @@ export default function EstoqueForm({
   const {
     handleSubmit,
     register,
-    reset,
     getValues,
     formState: { isSubmitting },
   } = useForm<FormEstoque>();
@@ -36,7 +35,7 @@ export default function EstoqueForm({
   );
 
   useEffect(() => {
-    if (data && data?.result && Array.isArray(data.result) && data.result.length > 0) {
+    if (data && data?.result && Array.isArray(data.result)) {
       setData(data.result);
     } else {
       setInfoMessage(data?.message);

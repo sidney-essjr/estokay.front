@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Funcao } from "../../common/enums/enumFuncao";
 import { sortItens } from "../../common/utils/sortItens";
+import { useDataVoluntario } from "../../hooks/useDataVoluntario";
 import { ItemDoacao } from "../../types/ItemDoacao";
 import Button from "../common/Button";
 import TableHeader from "./TableHeader";
@@ -15,6 +17,7 @@ export default function TabelaItensEstoque({
   setIsOpen: Dispatch<React.SetStateAction<boolean>>;
   setUpdatedItem: Dispatch<SetStateAction<ItemDoacao | undefined>>;
 }) {
+  const voluntario = useDataVoluntario();
   const [order, setOrder] = useState<{ order: "asc" | "desc"; key: keyof ItemDoacao }>({
     order: "asc",
     key: "categoria",
@@ -23,6 +26,7 @@ export default function TabelaItensEstoque({
   useEffect(() => {
     const reordered = sortItens([...itens], order.key, order.order);
     setItens(reordered);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order, setItens]);
 
   return (
@@ -30,9 +34,11 @@ export default function TabelaItensEstoque({
       <table className="w-full min-w-[600px] p-2 h-12 justify-around">
         <thead>
           <tr className="w-full h-12 text-center font-bold text-logo-gray-color">
-            <th scope="col" className=" w-24 border border-logo-gray-color">
-              <TableHeader>EDITAR</TableHeader>
-            </th>
+            {voluntario?.dataVoluntario?.funcao === Funcao.ADMIN && (
+              <th scope="col" className=" w-24 border border-logo-gray-color">
+                <TableHeader>EDITAR</TableHeader>
+              </th>
+            )}
             <th scope="col" className="border border-logo-gray-color">
               <TableHeader
                 objectKey="id"
@@ -98,18 +104,20 @@ export default function TabelaItensEstoque({
         <tbody>
           {itens.map((item) => (
             <tr key={item.id}>
-              <td className="p-2 h-12 border border-logo-gray-color">
-                <Button
-                  onClick={() => {
-                    setIsOpen(true);
-                    setUpdatedItem(item);
-                  }}
-                  className="w-full m-0 h-8"
-                  variant="none"
-                >
-                  Editar
-                </Button>
-              </td>
+              {voluntario?.dataVoluntario?.funcao === Funcao.ADMIN && (
+                <td className="p-2 h-12 border border-logo-gray-color">
+                  <Button
+                    onClick={() => {
+                      setIsOpen(true);
+                      setUpdatedItem(item);
+                    }}
+                    className="w-full m-0 h-8"
+                    variant="none"
+                  >
+                    Editar
+                  </Button>
+                </td>
+              )}
               <td className="p-2 text-center h-12 border border-logo-gray-color">{item.id}</td>
               <td className="p-2 h-12 border border-logo-gray-color">{item.categoria}</td>
               <td className="p-2 h-12 border border-logo-gray-color">{item.descricao}</td>
@@ -124,7 +132,10 @@ export default function TabelaItensEstoque({
             </tr>
           ))}
           <tr className="font-bold text-logo-gray-color">
-            <td colSpan={7} className="p-2 h-12 border border-logo-gray-color">
+            <td
+              colSpan={voluntario?.dataVoluntario?.funcao === Funcao.ADMIN ? 7 : 6}
+              className="p-2 h-12 border border-logo-gray-color"
+            >
               TOTAL
             </td>
             <td className="text-center p-2 h-12 border border-logo-gray-color">{itens.length}</td>

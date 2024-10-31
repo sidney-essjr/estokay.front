@@ -65,7 +65,7 @@ const router = createBrowserRouter([
       {
         path: "/estoque",
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute funcaoRequerida={Funcao.USUARIO}>
             <LayoutHomeLogado>
               <EstoquePage />
             </LayoutHomeLogado>
