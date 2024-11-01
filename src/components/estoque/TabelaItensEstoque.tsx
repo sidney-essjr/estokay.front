@@ -41,9 +41,6 @@ export default function TabelaItensEstoque({
             )}
             <th scope="col" className="border border-logo-gray-color">
               <TableHeader
-                objectKey="id"
-                currentFiltered={order.key}
-                changeOrdering={setOrder}
                 scope="col"
               >
                 COD.

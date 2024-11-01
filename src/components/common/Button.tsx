@@ -1,16 +1,11 @@
-import { ComponentPropsWithRef } from "react";
+import { ComponentPropsWithRef, memo } from "react";
 
 type ButtonProps = ComponentPropsWithRef<"button"> & {
   variant?: "default" | "success" | "attention" | "neutral" | "none";
   className?: string;
 };
 
-export default function Button({
-  variant = "default",
-  className = "",
-  children,
-  ...rest
-}: ButtonProps) {
+const Button = memo(({ variant = "default", className = "", children, ...rest }: ButtonProps) => {
   let bgStyle = "";
   const style = className;
 
@@ -40,4 +35,6 @@ export default function Button({
       {children}
     </button>
   );
-}
+});
+
+export default Button;
