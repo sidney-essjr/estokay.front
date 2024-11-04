@@ -23,6 +23,11 @@ export const medida = [
   { value: "Unidade", desc: "UNIDADE" },
 ];
 
+export const movimentacao = [
+  { value: "Entrada", desc: "ENTRADA" },
+  { value: "Saida", desc: "SAIDA" },
+];
+
 export const uf = [
   { value: "AC", desc: "AC" },
   { value: "AL", desc: "AL" },

@@ -13,6 +13,7 @@ import EstoquePage from "../pages/EstoquePage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RedefinirSenhaPage from "../pages/RedefinirSenhaPage";
+import RelatoriosPage from "../pages/RelatoriosPage";
 import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -73,11 +74,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/relatorio",
+        path: "/relatorios",
         element: (
           <ProtectedRoute>
             <LayoutHomeLogado>
-              <EstoquePage />
+              <RelatoriosPage />
             </LayoutHomeLogado>
           </ProtectedRoute>
         ),
