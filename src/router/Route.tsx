@@ -77,7 +77,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/relatorios",
+        path: "/relatorio",
         children: [
           {
             index: true,

@@ -48,7 +48,7 @@ export default function Sidebar() {
           icon={<ReportSVG />}
           isExpanded={isExpanded}
           desc="Relatório"
-          path="/relatorios"
+          path="/relatorio"
         />
         <SidebarItem
           icon={<ConfigSVG />}

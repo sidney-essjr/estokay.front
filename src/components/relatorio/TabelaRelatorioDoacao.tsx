@@ -30,7 +30,7 @@ const TabelaRelatorioDoacao = memo(({ data }: { data: RelatorioDoacoes[] }) => {
   return (
     <section>
       <MaterialTable
-        title="Relatórios"
+        title="Registros localizados"
         columns={columns}
         data={data}
         options={{
