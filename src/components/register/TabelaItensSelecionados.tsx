@@ -16,23 +16,23 @@ const TabelaItensSelecionados = memo(
     }
 
     return (
-      <section className="w-full overflow-auto max-h-96">
-        <table className="w-full min-w-[600px] p-2 h-12 justify-around border border-logo-gray-color">
+      <section className="w-full overflow-auto max-h-96 shadow-md">
+        <table className="w-full min-w-[600px] p-2 h-12 justify-around ">
           <thead>
-            <tr className="w-full p-2 h-12 text-center border border-logo-gray-color font-bold text-logo-gray-color">
-              <th scope="col" className="p-2 h-12 border border-logo-gray-color">
+            <tr className="w-full p-2 h-12 text-center  font-bold text-logo-gray-color">
+              <th scope="col" className="p-2 h-12 ">
                 COD.
               </th>
-              <th scope="col" className="p-2 h-12 border border-logo-gray-color">
+              <th scope="col" className="p-2 h-12 ">
                 TIPO
               </th>
-              <th scope="col" className="p-2 h-12 border border-logo-gray-color">
+              <th scope="col" className="p-2 h-12 ">
                 DESCRIÇÃO
               </th>
-              <th scope="col" className="p-2 h-12 border border-logo-gray-color">
+              <th scope="col" className="p-2 h-12 ">
                 QUANTIDADE
               </th>
-              <th scope="col" className="p-2 h-12 border border-logo-gray-color">
+              <th scope="col" className="p-2 h-12 ">
                 REMOVER
               </th>
             </tr>
@@ -40,15 +40,19 @@ const TabelaItensSelecionados = memo(
           <tbody>
             {itens.map((item) => (
               <tr key={item.id}>
-                <td className="p-2 h-12 border border-logo-gray-color text-center">{item.id}</td>
-                <td className="p-2 h-12 border border-logo-gray-color">{item.categoria}</td>
-                <td className="p-2 h-12 border border-logo-gray-color">
+                <td className="p-2 h-12 border-t border-b border-logo-gray-color text-center">
+                  {item.id}
+                </td>
+                <td className="p-2 h-12 border-t border-b border-logo-gray-color">
+                  {item.categoria}
+                </td>
+                <td className="p-2 h-12 border-t border-b border-logo-gray-color">
                   {item.descricao.split(" ").pop()}
                 </td>
-                <td className="p-2 h-12 border border-logo-gray-color text-center">
+                <td className="p-2 h-12 border-t border-b border-logo-gray-color text-center">
                   {item.quantidade}
                 </td>
-                <td className="p-2 h-12 border border-logo-gray-color">
+                <td className="p-2 h-12 border-t border-b border-logo-gray-color">
                   <Button className="w-[110px] h-8" onClick={() => remover(item.id)}>
                     Remover
                   </Button>
@@ -56,11 +60,13 @@ const TabelaItensSelecionados = memo(
               </tr>
             ))}
             <tr className="font-bold text-logo-gray-color">
-              <td colSpan={3} className="p-2 h-12 border border-logo-gray-color">
+              <td colSpan={3} className="p-2 h-12 border-t border-logo-gray-color">
                 TOTAL
               </td>
-              <td className="p-2 h-12 border border-logo-gray-color text-center">{itens.length}</td>
-              <td className="p-2 h-12 border border-logo-gray-color">
+              <td className="p-2 h-12 border-t border-logo-gray-color text-center">
+                {itens.length}
+              </td>
+              <td className="p-2 h-12 border-t border-logo-gray-color">
                 <Button className="w-[110px] h-8" onClick={() => setItens([])}>
                   Limpar
                 </Button>

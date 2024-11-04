@@ -42,7 +42,7 @@ export default function FormVoluntario() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 shadow-md sm:p-4 p-2 rounded-sm">
         <Input
           className="md:col-span-2"
           id="nome"
@@ -88,7 +88,7 @@ export default function FormVoluntario() {
         />
 
         <Button
-          className="w-full md:w-auto"
+          className="w-full md:w-[200px]"
           type="submit"
           variant="success"
           disabled={isSubmitting}

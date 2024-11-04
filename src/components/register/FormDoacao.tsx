@@ -75,7 +75,7 @@ export default function FormDoacao({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col space-y-2 ">
-      <div className="grid sm:grid-cols-4 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm">
+      <div className="grid sm:grid-cols-4 gap-2 shadow-md sm:p-4 p-2 rounded-sm">
         <SelectableInput
           id="doador"
           label="Doador*"
@@ -98,7 +98,7 @@ export default function FormDoacao({
       {fields.map((field, index) => (
         <div
           key={field.id}
-          className="grid sm:grid-cols-2 md:grid-cols-4 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm"
+          className="grid sm:grid-cols-2 md:grid-cols-4 gap-2 shadow-md sm:p-4 p-2 rounded-sm"
         >
           <Input
             id={`itens.${index}.descricao`}

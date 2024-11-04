@@ -118,7 +118,7 @@ export default function FormDistribuicao({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-2">
-      <div className="flex flex-col sm:flex-row gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm">
+      <div className="flex flex-col sm:flex-row gap-2 shadow-md sm:p-4 p-2 rounded-sm">
         <Input
           className="flex-1"
           id="nome"
@@ -133,7 +133,7 @@ export default function FormDistribuicao({
           {...register("documento")}
         />
       </div>
-      <div className="grid grid-cols-1 gap-2 lg:grid-cols-5 border border-logo-gray-color sm:p-4 p-2 rounded-sm">
+      <div className="grid grid-cols-1 gap-2 lg:grid-cols-5 shadow-md sm:p-4 p-2 rounded-sm">
         <SelectableInput
           id={"categoria"}
           label="Categoria*"

@@ -2,20 +2,16 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import Loading from "../../assets/svg/Loading";
-import { movimentacao } from "../../data/registerOptions";
-import {
-  getBuscarDistribuicao,
-  RelatorioDistribuicao,
-} from "../../services/fetchBuscarDistribuicao";
+import { getBuscarDoacao, RelatorioDoacoes } from "../../services/fetchBuscarDoacao";
 import { Relatorio } from "../../types/relatorio";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import SelectableInput from "../common/SelectableInput";
 
-export default function FormRelatorio({
+export default function FormRelatorioEntradas({
   setData,
 }: {
-  setData: Dispatch<SetStateAction<RelatorioDistribuicao[]>>;
+  setData: Dispatch<SetStateAction<RelatorioDoacoes[]>>;
 }) {
   const {
     handleSubmit,
@@ -24,57 +20,45 @@ export default function FormRelatorio({
     formState: { isSubmitting },
   } = useForm<Relatorio>();
   const [infoMessage, setInfoMessage] = useState("");
-  const {
-    data: dataDist,
-    refetch: refetchDist,
-    isRefetching,
-  } = useQuery(["distribuicao"], () => getBuscarDistribuicao(getValues()), {
-    enabled: false,
-  });
+  const { data, refetch, isRefetching } = useQuery(
+    ["doacoes"],
+    () => getBuscarDoacao(getValues()),
+    {
+      enabled: false,
+    }
+  );
 
   useEffect(() => {
-    handleDistReport();
+    handleDoacaoReport();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataDist]);
+  }, [data, isRefetching]);
 
-  function handleDistReport() {
-    if (dataDist && dataDist?.result && Array.isArray(dataDist.result)) {
-      setData(dataDist.result);
+  function handleDoacaoReport() {
+    if (data && data?.result && Array.isArray(data.result)) {
+      setData(data.result);
     } else {
-      setInfoMessage(dataDist?.message);
+      setInfoMessage(data?.message);
     }
     setTimeout(() => {
       setInfoMessage("");
     }, 4000);
   }
 
-  function onSubmit(formData: Relatorio) {
-    switch (formData.movimentacao.toUpperCase()) {
-      case "ENTRADA":
-        break;
-      case "SAIDA":
-        refetchDist();
-        break;
-      default:
-        setInfoMessage("Selecione a movimentação");
-        setTimeout(() => {
-          setInfoMessage("");
-        }, 4000);
-        break;
+  function onSubmit() {
+    refetch();
+    if (!data?.result) {
+      setInfoMessage(data?.message);
     }
+    setTimeout(() => {
+      setInfoMessage("");
+    }, 4000);
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-2">
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm">
+      <div className="grid md:grid-cols-3 gap-2 shadow-md  sm:p-4 p-2 rounded-sm">
         <Input id="dataInicio" label="Data Inicio" type="date" {...register("dataInicio")} />
         <Input id="dataFim" label="Data Fim" type="date" {...register("dataFim")} />
-        <SelectableInput
-          id="movimentacao"
-          label="Movimentação"
-          options={movimentacao}
-          {...register("movimentacao")}
-        />
         <SelectableInput
           id="voluntario"
           label="Voluntário"

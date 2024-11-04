@@ -13,6 +13,9 @@ import EstoquePage from "../pages/EstoquePage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RedefinirSenhaPage from "../pages/RedefinirSenhaPage";
+import RelatorioEntradasPage from "../pages/RelatorioEntradasPage";
+import RelatoriosGraficosPage from "../pages/RelatorioGraficosPage copy";
+import RelatorioSaidasPage from "../pages/RelatorioSaidasPage";
 import RelatoriosPage from "../pages/RelatoriosPage";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -75,13 +78,48 @@ const router = createBrowserRouter([
       },
       {
         path: "/relatorios",
-        element: (
-          <ProtectedRoute>
-            <LayoutHomeLogado>
-              <RelatoriosPage />
-            </LayoutHomeLogado>
-          </ProtectedRoute>
-        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <ProtectedRoute>
+                <LayoutHomeLogado>
+                  <RelatoriosPage />
+                </LayoutHomeLogado>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "entradas",
+            element: (
+              <ProtectedRoute>
+                <LayoutHomeLogado>
+                  <RelatorioEntradasPage />
+                </LayoutHomeLogado>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "saidas",
+            element: (
+              <ProtectedRoute>
+                <LayoutHomeLogado>
+                  <RelatorioSaidasPage />
+                </LayoutHomeLogado>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "graficos",
+            element: (
+              <ProtectedRoute>
+                <LayoutHomeLogado>
+                  <RelatoriosGraficosPage />
+                </LayoutHomeLogado>
+              </ProtectedRoute>
+            ),
+          },
+        ],
       },
       {
         path: "perfil",

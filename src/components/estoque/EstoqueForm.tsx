@@ -32,6 +32,9 @@ export default function EstoqueForm({
   const { data, refetch, isRefetching } = useQuery(
     ["itensDoacao"],
     () => getBuscarItensEstoque(getValues()),
+    {
+      enabled: false,
+    }
   );
 
   useEffect(() => {
@@ -44,7 +47,7 @@ export default function EstoqueForm({
       setInfoMessage("");
     }, 4000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [data, isRefetching]);
 
   function onSubmit() {
     refetch();
@@ -52,7 +55,7 @@ export default function EstoqueForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className="grid md:grid-cols-3 gap-2 border border-logo-gray-color sm:p-4 p-2 rounded-sm">
+      <div className="grid md:grid-cols-3 gap-2 shadow-md sm:p-4 p-2 rounded-sm">
         <SelectableInput
           id="categoria"
           label="Categoria"
