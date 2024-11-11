@@ -88,7 +88,7 @@ export default function FormVoluntario() {
         />
 
         <Button
-          className="w-full md:w-[200px]"
+          className="w-full mx-auto h-[48px] md:w-[200px]"
           type="submit"
           variant="success"
           disabled={isSubmitting}

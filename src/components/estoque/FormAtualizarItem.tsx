@@ -113,7 +113,12 @@ export default function FormAtualizarItem({
         error={errors?.validade?.message}
         {...register("validade")}
       />
-      <Button className="w-full md:w-auto" type="submit" variant="success" disabled={isSubmitting}>
+      <Button
+        className="w-full md:w-auto mt-auto mx-auto h-[48px]"
+        type="submit"
+        variant="success"
+        disabled={isSubmitting}
+      >
         {isSubmitting ? <Loading /> : "Atualizar"}
       </Button>
       {fetchInfo !== "" ? (

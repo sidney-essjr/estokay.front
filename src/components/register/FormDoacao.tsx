@@ -91,7 +91,7 @@ export default function FormDoacao({
           error={errors.dataEntrada?.message}
           {...register("dataEntrada")}
         />
-        <Button onClick={() => openModal(true)} type="button" variant="neutral">
+        <Button className="mt-auto w-full h-[48px]" onClick={() => openModal(true)} type="button" variant="neutral">
           Novo
         </Button>
       </div>
@@ -144,7 +144,7 @@ export default function FormDoacao({
             error={errors?.itens?.[index]?.validade?.message}
             {...register(`itens.${index}.validade`)}
           />
-          <Button className="w-full sm:w-auto" onClick={() => remove(index)}>
+          <Button className="w-full sm:w-auto mt-auto h-[48px]" onClick={() => remove(index)}>
             Remover
           </Button>
         </div>

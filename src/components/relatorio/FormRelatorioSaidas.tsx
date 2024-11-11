@@ -2,10 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import Loading from "../../assets/svg/Loading";
-import {
-  getBuscarDistribuicao,
-  RelatorioDistribuicao,
-} from "../../services/fetchBuscarDistribuicao";
+import { getDistribuicao, RelatorioDistribuicao } from "../../services/fetchBuscarDistribuicao";
 import { Relatorio } from "../../types/relatorio";
 import Button from "../common/Button";
 import Input from "../common/Input";
@@ -25,7 +22,7 @@ export default function FormRelatorioSaidas({
   const [infoMessage, setInfoMessage] = useState("");
   const { data, refetch, isRefetching } = useQuery(
     ["distribuicao"],
-    () => getBuscarDistribuicao(getValues()),
+    () => getDistribuicao(getValues()),
     { enabled: false }
   );
 

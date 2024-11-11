@@ -29,7 +29,7 @@ const Button = memo(({ variant = "default", className = "", children, ...rest }:
 
   return (
     <button
-      className={`px-6 py-2 rounded-sm text-white font-bold flex items-center w-3/5 m-auto justify-center h-10 ${bgStyle} ${style}`}
+      className={`px-6 py-2 rounded-sm text-white font-bold flex items-center w-3/5 justify-center h-10 ${bgStyle} ${style}`}
       {...rest}
     >
       {children}

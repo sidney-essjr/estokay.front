@@ -2,7 +2,7 @@ import { catchErrorHandler } from "../common/utils/errorHandler";
 import { responseHandler } from "../common/utils/responseHandler";
 import { ItemDoacao } from "../types/ItemDoacao";
 
-export async function getBuscarItensEstoque(params = {}) {
+export async function getItensEstoque(params = {}) {
   const url = new URL(`${import.meta.env.VITE_BASE_URL}/estoque/buscar`);
   url.search = new URLSearchParams(params).toString();
 

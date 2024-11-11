@@ -8,13 +8,13 @@ import {
   formDistribuicaoValidationSchema,
 } from "../../common/validations/formDistribuicaoValidationSchema";
 import { categorias } from "../../data/registerOptions";
+import { getItensEstoque } from "../../services/fetchBuscarItensEstoque";
 import { postCriarDistribuicao } from "../../services/fetchCriarDistribuicao";
 import { ItemDoacao } from "../../types/ItemDoacao";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import SelectableInput from "../common/SelectableInput";
 import { ItemDistribuicao } from "./DistribuicaoContainer";
-import { getBuscarItensEstoque } from "../../services/fetchBuscarItensEstoque";
 
 export default function FormDistribuicao({
   itens,
@@ -43,7 +43,7 @@ export default function FormDistribuicao({
   });
   const [quantidadePorItem, setQuantidadePorItem] = useState<{ value: number; desc: string }[]>([]);
   const [descItem, setDescItem] = useState<{ value: string; desc: string }[]>([]);
-  useQuery(["itensDoacao"], () => getBuscarItensEstoque(), {
+  useQuery(["itensDoacao"], () => getItensEstoque(), {
     onSuccess: (data) => {
       setData(
         typeof data.result === "object" ? data.result.filter((item) => item.quantidade > 0) : []
@@ -160,7 +160,7 @@ export default function FormDistribuicao({
         />
 
         <Button
-          className="w-full lg:col-span-1 lg:w-auto"
+          className="w-full lg:col-span-1 lg:w-auto mt-auto h-[48px]"
           variant="neutral"
           type="button"
           onClick={() => addItem()}

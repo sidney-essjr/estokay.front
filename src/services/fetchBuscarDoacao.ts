@@ -8,13 +8,15 @@ export type RelatorioDoacoes = {
     cidade: string;
     estado: string;
   };
-  itens: [{ quantidade: number; descricao: string; medida: string; tamanho: string }];
+  itens: [
+    { quantidade: number; categoria: string; descricao: string; medida: string; tamanho: string }
+  ];
   voluntario: {
     nome: string;
   };
 };
 
-export async function getBuscarDoacao(params = {}) {
+export async function getDoacao(params = {}) {
   const url = new URL(`${import.meta.env.VITE_BASE_URL}/doacoes/buscar`);
   url.search = new URLSearchParams(params).toString();
 

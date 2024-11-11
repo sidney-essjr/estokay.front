@@ -14,7 +14,7 @@ export type RelatorioDistribuicao = {
   voluntario: { nome: string };
 };
 
-export async function getBuscarDistribuicao(params = {}) {
+export async function getDistribuicao(params = {}) {
   const url = new URL(`${import.meta.env.VITE_BASE_URL}/distribuicoes/buscar`);
   url.search = new URLSearchParams(params).toString();
 

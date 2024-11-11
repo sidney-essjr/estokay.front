@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import Loading from "../../assets/svg/Loading";
 import { categorias, tamanhos } from "../../data/registerOptions";
-import { getBuscarItensEstoque } from "../../services/fetchBuscarItensEstoque";
+import { getItensEstoque } from "../../services/fetchBuscarItensEstoque";
 import { ItemDoacao } from "../../types/ItemDoacao";
 import Button from "../common/Button";
 import Input from "../common/Input";
@@ -31,7 +31,7 @@ export default function EstoqueForm({
 
   const { data, refetch, isRefetching } = useQuery(
     ["itensDoacao"],
-    () => getBuscarItensEstoque(getValues()),
+    () => getItensEstoque(getValues()),
     {
       enabled: false,
     }
@@ -71,7 +71,7 @@ export default function EstoqueForm({
         <SelectableInput id="tamanho" label="Tamanho" options={tamanhos} {...register("tamanho")} />
         <Input id="validade" label="Valido até" type="date" {...register("validade")} />
         <Button
-          className="w-full md:w-[118px]"
+          className="w-full mt-auto mx-auto h-[48px]"
           type="submit"
           variant="neutral"
           disabled={isSubmitting}

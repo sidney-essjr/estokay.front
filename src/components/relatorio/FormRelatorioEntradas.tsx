@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import Loading from "../../assets/svg/Loading";
-import { getBuscarDoacao, RelatorioDoacoes } from "../../services/fetchBuscarDoacao";
+import { getDoacao, RelatorioDoacoes } from "../../services/fetchBuscarDoacao";
 import { Relatorio } from "../../types/relatorio";
 import Button from "../common/Button";
 import Input from "../common/Input";
@@ -20,13 +20,9 @@ export default function FormRelatorioEntradas({
     formState: { isSubmitting },
   } = useForm<Relatorio>();
   const [infoMessage, setInfoMessage] = useState("");
-  const { data, refetch, isRefetching } = useQuery(
-    ["doacoes"],
-    () => getBuscarDoacao(getValues()),
-    {
-      enabled: false,
-    }
-  );
+  const { data, refetch, isRefetching } = useQuery(["doacoes"], () => getDoacao(getValues()), {
+    enabled: false,
+  });
 
   useEffect(() => {
     handleDoacaoReport();

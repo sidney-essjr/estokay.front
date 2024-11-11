@@ -53,7 +53,7 @@ const TabelaItensSelecionados = memo(
                   {item.quantidade}
                 </td>
                 <td className="p-2 h-12 border-t border-b border-logo-gray-color">
-                  <Button className="w-[110px] h-8" onClick={() => remover(item.id)}>
+                  <Button className="w-[110px] mx-auto h-8" onClick={() => remover(item.id)}>
                     Remover
                   </Button>
                 </td>
@@ -67,7 +67,7 @@ const TabelaItensSelecionados = memo(
                 {itens.length}
               </td>
               <td className="p-2 h-12 border-t border-logo-gray-color">
-                <Button className="w-[110px] h-8" onClick={() => setItens([])}>
+                <Button className="w-[110px] mx-auto h-8" onClick={() => setItens([])}>
                   Limpar
                 </Button>
               </td>
