@@ -1,7 +1,7 @@
 import { Column } from "@material-table/core";
+import { RelatorioDistribuicao } from "../../services/fetchBuscarDistribuicao";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { RelatorioDistribuicao } from "../../services/fetchBuscarDistribuicao";
 
 export function exportPDFDistribuicao({
   data,
@@ -12,6 +12,8 @@ export function exportPDFDistribuicao({
   columns: Column<any>[];
 }) {
   const doc = new jsPDF();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   doc.autoTable({
     head: [columns.map((col) => col.title)],
     body: data.map((row) => [

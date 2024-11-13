@@ -12,6 +12,8 @@ export function exportPDFDoacao({
   columns: Column<any>[];
 }) {
   const doc = new jsPDF();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   doc.autoTable({
     head: [columns.map((col) => col.title)],
     body: data.map((row) => [

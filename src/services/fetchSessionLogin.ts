@@ -1,6 +1,6 @@
 import { catchErrorHandler } from "../common/utils/errorHandler";
 import { responseHandler } from "../common/utils/responseHandler";
-import { DataVonlutario } from "../providers/context/DataVolutarioContext";
+import { Voluntario } from "../types/voluntario";
 
 export async function postSessionLogin() {
   try {
@@ -14,10 +14,10 @@ export async function postSessionLogin() {
     let result;
 
     if (response.ok) {
-      result = (await response.json()) as DataVonlutario;
+      result = (await response.json()) as Voluntario;
     }
 
-    return await responseHandler<DataVonlutario>(response, { result: result });
+    return await responseHandler<Voluntario>(response, { result: result });
   } catch (error) {
     return catchErrorHandler(error);
   }
