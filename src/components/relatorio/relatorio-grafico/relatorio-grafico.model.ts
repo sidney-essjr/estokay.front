@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useQueries } from "react-query";
-import { getDistribuicao } from "../../../services/fetchBuscarDistribuicao";
+import { IGetDistribuicao } from "../../../services/fetchBuscarDistribuicao";
 import { getDoacao } from "../../../services/fetchBuscarDoacao";
 import { Relatorio } from "../../../types/relatorio";
 
-const useRelatorioGraficoModel = () => {
+type RelatorioGraficoProps = {
+  getDistribuicao: IGetDistribuicao;
+};
+
+const useRelatorioGraficoModel = ({ getDistribuicao }: RelatorioGraficoProps) => {
   const {
     handleSubmit,
     getValues,
@@ -12,9 +16,9 @@ const useRelatorioGraficoModel = () => {
     formState: { isSubmitting },
   } = useForm<Relatorio>();
 
-  const [doacoes,  distribuicoes] = useQueries([
+  const [doacoes, distribuicoes] = useQueries([
     { queryKey: ["doador"], queryFn: () => getDoacao(getValues()), enabled: false },
-    { queryKey: ["itensDoacao"], queryFn: () => getDistribuicao(getValues), enabled: false },
+    { queryKey: ["itensDoacao"], queryFn: () => getDistribuicao.exec(getValues()), enabled: false },
   ]);
 
   function onSubmit() {
@@ -24,7 +28,6 @@ const useRelatorioGraficoModel = () => {
 
   return {
     handleSubmit,
-    getValues,
     register,
     isSubmitting,
     onSubmit,

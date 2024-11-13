@@ -4,9 +4,16 @@ import Input from "../../common/Input";
 import SelectableInput from "../../common/SelectableInput";
 import useRelatorioGraficoModel from "./relatorio-grafico.model";
 
-export default function RelatorioGraficoViewForm() {
-  const { handleSubmit, onSubmit, doacoes, distribuicoes, isSubmitting, register } =
-    useRelatorioGraficoModel();
+type RelatorioGraficoViewFormProps = ReturnType<typeof useRelatorioGraficoModel>;
+
+export default function RelatorioGraficoViewForm({
+  distribuicoes,
+  doacoes,
+  handleSubmit,
+  isSubmitting,
+  onSubmit,
+  register,
+}: RelatorioGraficoViewFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-2">
       <div className="grid md:grid-cols-3 gap-2 shadow-md  sm:p-4 p-2 rounded-sm">

@@ -1,5 +1,4 @@
-import { catchErrorHandler } from "../common/utils/errorHandler";
-import { responseHandler } from "../common/utils/responseHandler";
+import { Relatorio } from "../types/relatorio";
 
 export type RelatorioDistribuicao = {
   criado: Date;
@@ -14,11 +13,20 @@ export type RelatorioDistribuicao = {
   voluntario: { nome: string };
 };
 
-export async function getDistribuicao(params = {}) {
-  const url = new URL(`${import.meta.env.VITE_BASE_URL}/distribuicoes/buscar`);
-  url.search = new URLSearchParams(params).toString();
+export interface IGetDistribuicao {
+  exec: (params: Relatorio) => Promise<RelatorioDistribuicao[]>;
+}
 
-  try {
+export class GetDistribuicao implements IGetDistribuicao {
+  async exec(params: Relatorio) {
+    const url = new URL(`${import.meta.env.VITE_BASE_URL}/distribuicoes/buscar`);
+
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        url.searchParams.append(key, String(value));
+      }
+    });
+
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -27,14 +35,16 @@ export async function getDistribuicao(params = {}) {
       credentials: "include",
     });
 
-    let result;
+    if (!response.ok)
+      throw new Error(
+        "Tivemos um problema para completar sua solicitação, estamos verificando a situação. Tente novamente mais tarde."
+      );
 
-    if (response.ok) {
-      result = (await response.json()) as RelatorioDistribuicao[];
-    }
+    const data = (await response.json()) as RelatorioDistribuicao[];
 
-    return await responseHandler<RelatorioDistribuicao[]>(response, { result: result });
-  } catch (error) {
-    return catchErrorHandler(error);
+    console.log(url);
+    console.log(data);
+
+    return data;
   }
 }

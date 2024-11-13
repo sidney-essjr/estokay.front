@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import Loading from "../../assets/svg/Loading";
-import { getDistribuicao, RelatorioDistribuicao } from "../../services/fetchBuscarDistribuicao";
+import { GetDistribuicao, RelatorioDistribuicao } from "../../services/fetchBuscarDistribuicao";
 import { Relatorio } from "../../types/relatorio";
 import Button from "../common/Button";
 import Input from "../common/Input";
@@ -13,44 +13,25 @@ export default function FormRelatorioSaidas({
 }: {
   setData: Dispatch<SetStateAction<RelatorioDistribuicao[]>>;
 }) {
+  const getDistribuicao = new GetDistribuicao();
   const {
     handleSubmit,
     getValues,
     register,
     formState: { isSubmitting },
   } = useForm<Relatorio>();
-  const [infoMessage, setInfoMessage] = useState("");
-  const { data, refetch, isRefetching } = useQuery(
+  const { refetch, isRefetching } = useQuery(
     ["distribuicao"],
-    () => getDistribuicao(getValues()),
-    { enabled: false }
-  );
-
-  useEffect(() => {
-    handleDistReport();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, isRefetching]);
-
-  function handleDistReport() {
-    if (data && data?.result && Array.isArray(data.result)) {
-      setData(data.result);
-    } else {
-      setInfoMessage(data?.message);
+    () => getDistribuicao.exec(getValues()),
+    {
+      enabled: false,
+      onSuccess: setData,
     }
-    setTimeout(() => {
-      setInfoMessage("");
-    }, 4000);
-  }
+  );
 
   function onSubmit() {
     refetch();
-
-    if (!data?.result) {
-      setInfoMessage(data?.message);
-    }
-    setTimeout(() => {
-      setInfoMessage("");
-    }, 4000);
+    console.log(getValues());
   }
 
   return (
@@ -66,13 +47,8 @@ export default function FormRelatorioSaidas({
         />
       </div>
       <div className="md:col-span-2 lg:col-span-4 flex flex-col-reverse md:flex-row">
-        {infoMessage !== "" ? (
-          <p className="h-9 md:flex-1 pt-3 text-center text-sm text-detail-color">{infoMessage}</p>
-        ) : (
-          <p className="h-9 md:flex-1"></p>
-        )}
         <Button
-          className="w-full md:w-[118px]"
+          className="w-full ml-auto md:w-[118px]"
           type="submit"
           variant="neutral"
           disabled={isSubmitting}

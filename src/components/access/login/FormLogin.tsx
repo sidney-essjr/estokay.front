@@ -54,7 +54,7 @@ export default function FormLogin() {
       <Link to="/access/esqueceu-senha" className="mb-6 text-attention-color underline">
         Esqueci minha senha
       </Link>
-      <Button disabled={isSubmitting} type="submit">
+      <Button disabled={isSubmitting} type="submit" className="m-auto">
         {isSubmitting ? <Loading /> : "Acessar minha conta"}
       </Button>
 
