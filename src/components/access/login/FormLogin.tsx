@@ -25,7 +25,9 @@ export default function FormLogin() {
     const response = await postLogin(data);
     if (response.result) {
       reset();
-      navigate("/cadastro");
+      setTimeout(() => {
+        navigate("/cadastro");
+      }, 10000);
     } else {
       setFetchInfo(response.message);
       setTimeout(() => {
