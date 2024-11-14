@@ -19,12 +19,12 @@ export default function ProtectedRoute({
       const result = response?.result;
 
       if (!result || typeof result !== "object") {
-        navigate("/nao-autorizado");
+        navigate("/nao-autorizadoos");
         return;
       }
 
       if (result.funcao < funcaoRequerida.valueOf()) {
-        navigate("/nao-autorizado");
+        navigate("/nao-autorizados");
         return;
       }
     }
