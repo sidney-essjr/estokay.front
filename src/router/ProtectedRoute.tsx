@@ -18,6 +18,8 @@ export default function ProtectedRoute({
       const response = await sessionLogin();
       const result = response?.result;
 
+      console.log(result)
+
       if (!result || typeof result !== "object") {
         navigate("/nao-autorizadoos");
         return;
