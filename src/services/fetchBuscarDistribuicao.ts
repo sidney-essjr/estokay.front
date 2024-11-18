@@ -42,9 +42,6 @@ export class GetDistribuicao implements IGetDistribuicao {
 
     const data = (await response.json()) as RelatorioDistribuicao[];
 
-    console.log(url);
-    console.log(data);
-
     return data;
   }
 }

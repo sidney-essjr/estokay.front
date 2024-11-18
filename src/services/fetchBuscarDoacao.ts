@@ -1,5 +1,4 @@
-import { catchErrorHandler } from "../common/utils/errorHandler";
-import { responseHandler } from "../common/utils/responseHandler";
+import { Relatorio } from "../types/relatorio";
 
 export type RelatorioDoacoes = {
   dataEntrada: Date;
@@ -16,11 +15,20 @@ export type RelatorioDoacoes = {
   };
 };
 
-export async function getDoacao(params = {}) {
-  const url = new URL(`${import.meta.env.VITE_BASE_URL}/doacoes/buscar`);
-  url.search = new URLSearchParams(params).toString();
+export interface IGetDoacao {
+  exec: (params: Relatorio) => Promise<RelatorioDoacoes[]>;
+}
 
-  try {
+export class GetDoacoes implements IGetDoacao {
+  async exec(params: Relatorio) {
+    const url = new URL(`${import.meta.env.VITE_BASE_URL}/doacoes/buscar`);
+
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        url.searchParams.append(key, String(value));
+      }
+    });
+
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -29,14 +37,13 @@ export async function getDoacao(params = {}) {
       credentials: "include",
     });
 
-    let result;
+    if (!response.ok)
+      throw new Error(
+        "Tivemos um problema para completar sua solicitação, estamos verificando a situação. Tente novamente mais tarde."
+      );
 
-    if (response.ok) {
-      result = (await response.json()) as RelatorioDoacoes[];
-    }
+    const data = (await response.json()) as RelatorioDoacoes[];
 
-    return await responseHandler<RelatorioDoacoes[]>(response, { result: result });
-  } catch (error) {
-    return catchErrorHandler(error);
+    return data;
   }
 }

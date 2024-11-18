@@ -14,7 +14,7 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RedefinirSenhaPage from "../pages/RedefinirSenhaPage";
 import RelatorioEntradasPage from "../pages/RelatorioEntradasPage";
-import RelatoriosGraficosPage from "../pages/RelatorioGraficosPage copy";
+import RelatoriosGraficosPage from "../pages/RelatorioGraficosPage";
 import RelatorioSaidasPage from "../pages/RelatorioSaidasPage";
 import RelatoriosPage from "../pages/RelatoriosPage";
 import ProtectedRoute from "./ProtectedRoute";

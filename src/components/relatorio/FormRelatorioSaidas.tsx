@@ -31,7 +31,6 @@ export default function FormRelatorioSaidas({
 
   function onSubmit() {
     refetch();
-    console.log(getValues());
   }
 
   return (

@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import Loading from "../../assets/svg/Loading";
-import { getDoacao, RelatorioDoacoes } from "../../services/fetchBuscarDoacao";
+import { GetDoacoes, RelatorioDoacoes } from "../../services/fetchBuscarDoacao";
 import { Relatorio } from "../../types/relatorio";
 import Button from "../common/Button";
 import Input from "../common/Input";
@@ -13,41 +13,20 @@ export default function FormRelatorioEntradas({
 }: {
   setData: Dispatch<SetStateAction<RelatorioDoacoes[]>>;
 }) {
+  const getDoacoes = new GetDoacoes();
   const {
     handleSubmit,
     getValues,
     register,
     formState: { isSubmitting },
   } = useForm<Relatorio>();
-  const [infoMessage, setInfoMessage] = useState("");
-  const { data, refetch, isRefetching } = useQuery(["doacoes"], () => getDoacao(getValues()), {
+  const { refetch, isRefetching } = useQuery(["doacoes"], () => getDoacoes.exec(getValues()), {
     enabled: false,
+    onSuccess: setData,
   });
-
-  useEffect(() => {
-    handleDoacaoReport();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, isRefetching]);
-
-  function handleDoacaoReport() {
-    if (data && data?.result && Array.isArray(data.result)) {
-      setData(data.result);
-    } else {
-      setInfoMessage(data?.message);
-    }
-    setTimeout(() => {
-      setInfoMessage("");
-    }, 4000);
-  }
 
   function onSubmit() {
     refetch();
-    if (!data?.result) {
-      setInfoMessage(data?.message);
-    }
-    setTimeout(() => {
-      setInfoMessage("");
-    }, 4000);
   }
 
   return (
@@ -63,13 +42,8 @@ export default function FormRelatorioEntradas({
         />
       </div>
       <div className="md:col-span-2 lg:col-span-4 flex flex-col-reverse md:flex-row">
-        {infoMessage !== "" ? (
-          <p className="h-9 md:flex-1 pt-3 text-center text-sm text-detail-color">{infoMessage}</p>
-        ) : (
-          <p className="h-9 md:flex-1"></p>
-        )}
         <Button
-          className="w-full md:w-[118px]"
+          className="w-full  ml-auto md:w-[118px]"
           type="submit"
           variant="neutral"
           disabled={isSubmitting}
