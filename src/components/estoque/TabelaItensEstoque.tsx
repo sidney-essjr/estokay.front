@@ -42,8 +42,8 @@ const TabelaItensEstoque = memo(
                 {
                   icon: () => <EditSVG />,
                   tooltip: "Editar",
-                  onClick: (item) => {
-                    setUpdatedItem(item);
+                  onClick: (_, item) => {
+                    setUpdatedItem(item as ItemDoacao);
                     setIsOpen(true);
                   },
                 },
