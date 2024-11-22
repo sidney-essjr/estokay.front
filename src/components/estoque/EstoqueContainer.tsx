@@ -12,12 +12,7 @@ export default function EstoqueContainer() {
   return (
     <section>
       <EstoqueForm setData={setData} />
-      <TabelaItensEstoque
-        itens={data}
-        setUpdatedItem={setUpdatedItem}
-        setIsOpen={setIsOpen}
-        setItens={setData}
-      />
+      <TabelaItensEstoque itens={data} setUpdatedItem={setUpdatedItem} setIsOpen={setIsOpen} />
       {isOpen && (
         <Modal title="Atualizar Item" openModal={setIsOpen}>
           {updatedItem && <FormAtualizarItem openModal={setIsOpen} item={updatedItem} />}

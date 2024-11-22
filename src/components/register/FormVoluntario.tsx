@@ -95,12 +95,12 @@ export default function FormVoluntario() {
         >
           {isSubmitting ? <Loading /> : "Registrar"}
         </Button>
+        {fetchInfo !== "" ? (
+          <p className="h-9 text-center text-sm text-detail-color">{fetchInfo}</p>
+        ) : (
+          <p className="h-9 md:col-span-3 pt-9"></p>
+        )}
       </div>
-      {fetchInfo !== "" ? (
-        <p className="h-9 text-center text-sm text-detail-color">{fetchInfo}</p>
-      ) : (
-        <p className="h-9 md:col-span-3 pt-9"></p>
-      )}
     </form>
   );
 }

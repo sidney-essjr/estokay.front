@@ -1,5 +1,3 @@
-import { categorias } from "../../../../data/registerOptions";
-
 type ItensDoacao = [
   {
     quantidade: number;

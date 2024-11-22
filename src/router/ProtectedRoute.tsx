@@ -18,15 +18,13 @@ export default function ProtectedRoute({
       const response = await sessionLogin();
       const result = response?.result;
 
-      console.log(result)
-
       if (!result || typeof result !== "object") {
-        navigate("/nao-autorizadoos");
+        navigate("/nao-autorizado");
         return;
       }
 
       if (result.funcao < funcaoRequerida.valueOf()) {
-        navigate("/nao-autorizados");
+        navigate("/nao-autorizado");
         return;
       }
     }

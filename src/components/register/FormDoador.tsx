@@ -14,7 +14,11 @@ import Button from "../common/Button";
 import Input from "../common/Input";
 import SelectableInput from "../common/SelectableInput";
 
-export default function FormDoador({ openModal }: { openModal: (open: boolean) => void }) {
+interface FormDoadorProps {
+  readonly openModal: (open: boolean) => void;
+}
+
+export default function FormDoador({ openModal }: FormDoadorProps) {
   const {
     register,
     reset,

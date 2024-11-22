@@ -55,7 +55,7 @@ export default function FormRedefinirSenha() {
         error={errors.confirmarSenha?.message}
         {...register("confirmarSenha")}
       />
-      <Button type="submit" disabled={isSubmitting}>
+      <Button type="submit" className="m-auto" disabled={isSubmitting}>
         {isSubmitting ? <Loading /> : "Cadastrar"}
       </Button>
 

@@ -54,7 +54,7 @@ export default function FormDistribuicao({
   function changeQuantity(e: HTMLSelectElement["value"]) {
     const id = Number(e.split(" ")[0]);
     const quantidade = data.find((item) => item.id === id)?.quantidade;
-    if (quantidade && !isNaN(quantidade)) {
+    if (quantidade && !Number.isNaN(quantidade)) {
       const options = [];
       for (let index = 1; index <= quantidade; index++) {
         options.push({ value: index, desc: String(index) });

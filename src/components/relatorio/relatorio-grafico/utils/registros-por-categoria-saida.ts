@@ -1,5 +1,3 @@
-import { categorias } from "../../../../data/registerOptions";
-
 type ItensDistribuicao = [
   {
     itemEstoque: {
@@ -11,7 +9,6 @@ type ItensDistribuicao = [
     quantidade: number;
   }
 ][];
-
 
 const calcRegistrosPorCategoriaSaida = (distribuicao: ItensDistribuicao) => {
   const registrosPorCategoria = new Map<string, number>();

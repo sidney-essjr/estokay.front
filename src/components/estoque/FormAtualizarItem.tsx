@@ -14,10 +14,10 @@ import SelectableInput from "../common/SelectableInput";
 export default function FormAtualizarItem({
   item,
   openModal,
-}: {
+}: Readonly<{
   item: ItemDoacao;
   openModal: Dispatch<SetStateAction<boolean>>;
-}) {
+}>) {
   const {
     register,
     reset,

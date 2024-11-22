@@ -21,7 +21,7 @@ const calcRegistrosPorMes = (datas: Date[]) => {
   // Iterando sobre todas as datas
   datas.forEach((data) => {
     const dataFormatada = new Date(data)
-    if (dataFormatada instanceof Date && !isNaN(dataFormatada.getTime())) {
+    if (dataFormatada instanceof Date && !Number.isNaN(dataFormatada.getTime())) {
       const mes = dataFormatada.getMonth(); // 0 - Janeiro, 11 - Dezembro
       const nomeMes = nomesMeses[mes];
 

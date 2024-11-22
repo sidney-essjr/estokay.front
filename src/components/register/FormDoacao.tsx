@@ -18,13 +18,13 @@ import SelectableInput from "../common/SelectableInput";
 export default function FormDoacao({
   query,
   openModal,
-}: {
+}: Readonly<{
   query: UseQueryResult<{
     result: boolean | Doador[];
     message: string;
   }>;
   openModal: (open: boolean) => void;
-}) {
+}>) {
   const {
     register,
     reset,

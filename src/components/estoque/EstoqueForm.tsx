@@ -18,9 +18,9 @@ type FormEstoque = {
 
 export default function EstoqueForm({
   setData,
-}: {
+}: Readonly<{
   setData: Dispatch<SetStateAction<ItemDoacao[]>>;
-}) {
+}>) {
   const {
     handleSubmit,
     register,

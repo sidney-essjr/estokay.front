@@ -8,10 +8,12 @@ import CadastroDistribuicaoPage from "../pages/CadastroDistribuicaoPage";
 import CadastroDoacaoPage from "../pages/CadastroDoacaoPage";
 import CadastroPage from "../pages/CadastroPage";
 import CadastroVoluntarioPage from "../pages/CadastroVoluntarioPage";
+import ConfiguracoesPage from "../pages/ConfiguracoesPage";
 import EsqueceuSenhaPage from "../pages/EsqueceuSenhaPage";
 import EstoquePage from "../pages/EstoquePage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
+import PerfilPage from "../pages/PerfilPage";
 import RedefinirSenhaPage from "../pages/RedefinirSenhaPage";
 import RelatorioEntradasPage from "../pages/RelatorioEntradasPage";
 import RelatoriosGraficosPage from "../pages/RelatorioGraficosPage";
@@ -122,12 +124,32 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "perfil",
-        element: (
-          <ProtectedRoute funcaoRequerida={Funcao.USUARIO}>
-            <LayoutHomeLogado>Perfil</LayoutHomeLogado>
-          </ProtectedRoute>
-        ),
+        path: "/configuracoes",
+        children: [
+          {
+            index: true,
+            element: (
+              <ProtectedRoute funcaoRequerida={Funcao.USUARIO}>
+                <LayoutHomeLogado>
+                  <ConfiguracoesPage />
+                </LayoutHomeLogado>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "perfil",
+            element: (
+              <ProtectedRoute funcaoRequerida={Funcao.USUARIO}>
+                <LayoutHomeLogado>
+                  <PerfilPage />
+                </LayoutHomeLogado>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "gerenciamento",
+          },
+        ],
       },
     ],
   },

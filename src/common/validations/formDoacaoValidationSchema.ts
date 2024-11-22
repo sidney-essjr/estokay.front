@@ -19,7 +19,7 @@ export const itemDoacaoValidationSchema = z.object({
     .optional()
     .transform((val) => (val ? new Date(val) : undefined))
     .refine((val) => !val || val >= new Date(), { message: "Produto vencido" })
-    .refine((val) => !val || !isNaN(val.getTime()), { message: "Data inválida" }),
+    .refine((val) => !val || !Number.isNaN(val.getTime()), { message: "Data inválida" }),
 });
 
 export const formDoacaoValidationSchema = z.object({
@@ -29,7 +29,7 @@ export const formDoacaoValidationSchema = z.object({
     .trim()
     .transform((val) => new Date(val))
     .refine((val) => val <= new Date(), { message: "Data inválida" })
-    .refine((val) => !isNaN(val.getTime()), { message: "Data inválida" }),
+    .refine((val) => !Number.isNaN(val.getTime()), { message: "Data inválida" }),
   itens: z.array(itemDoacaoValidationSchema).min(1, "Nenhum item vinculado"),
 });
 

@@ -2,7 +2,7 @@ type GraficoViewProps = {
   itensTotal: number;
   registrosPorCategoria: Map<string, number> | undefined;
   registrosPorMes: Record<string, number> | undefined;
-  registrosPorUF?: Map<string, number> | undefined;
+  registrosPorUF?: Map<string, number>;
 };
 
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryPie, VictoryTheme } from "victory";
@@ -12,7 +12,6 @@ export default function GraficoView({
   itensTotal,
   registrosPorCategoria,
   registrosPorMes,
-  registrosPorUF,
 }: GraficoViewProps) {
   console.log(registrosPorMes);
   return (
