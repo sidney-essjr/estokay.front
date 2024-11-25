@@ -114,7 +114,7 @@ export default function FormAtualizarItem({
         {...register("validade")}
       />
       <Button
-        className="w-full md:w-auto mt-auto mx-auto h-[48px]"
+        className="w-full mt-auto mx-auto h-[48px]"
         type="submit"
         variant="success"
         disabled={isSubmitting}

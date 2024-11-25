@@ -5,7 +5,7 @@ import { ItemDoacao } from "../types/ItemDoacao";
 export async function postAtualizarItem(data: ItemDoacao) {
   try {
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/estoque/atualizar/${data.id}`, {
-      method: "POST",
+      method: "PATCH",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",

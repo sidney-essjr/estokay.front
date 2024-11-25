@@ -29,12 +29,8 @@ export default function EstoqueForm({
   } = useForm<FormEstoque>();
   const [infoMessage, setInfoMessage] = useState("");
 
-  const { data, refetch, isRefetching } = useQuery(
-    ["itensDoacao"],
-    () => getItensEstoque(getValues()),
-    {
-      enabled: false,
-    }
+  const { data, refetch, isRefetching } = useQuery(["itensDoacao"], () =>
+    getItensEstoque(getValues())
   );
 
   useEffect(() => {

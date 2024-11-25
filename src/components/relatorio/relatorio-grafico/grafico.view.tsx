@@ -15,13 +15,13 @@ export default function GraficoView({
 }: GraficoViewProps) {
   console.log(registrosPorMes);
   return (
-    <section className="flex flex-wrap justify-between p-4 shadow-md items-center">
+    <section className="flex flex-wrap justify-center gap-4 sm:gap-0 sm:justify-between p-4 shadow-md items-center">
       <div className="flex flex-col items-start">
-        <Title className="text-[16px]">
+        <Title className="text-[15px]">
           <h3>Registros por mês</h3>
         </Title>
         <div className="max-w-[400px] h-[300px] overflow-auto">
-          <VictoryChart theme={VictoryTheme.clean} domainPadding={20}>
+          <VictoryChart theme={VictoryTheme.clean} domainPadding={20} width={320}>
             <VictoryAxis
               style={{ tickLabels: { fontSize: 12, padding: 5, fontFamily: "Roboto" } }}
             />
@@ -51,16 +51,16 @@ export default function GraficoView({
         </div>
       </div>
       <div className="flex flex-col w-[200px] h-[150px] space-y-2 p-4 shadow-md">
-        <Title className="text-[16px]">
+        <Title className="text-[15px]">
           <h3>Total</h3>
         </Title>
         <h2 className="text-5xl text-center">{itensTotal}</h2>
       </div>
       <div className="flex flex-col items-start">
-        <Title className="text-[16px]">
+        <Title className="text-[15px]">
           <h3>Registros por categoria</h3>
         </Title>
-        <div className="w-[300px] h-[300px]">
+        <div className="w-[320px] h-[300px]">
           <VictoryPie
             data={
               registrosPorCategoria

@@ -1,13 +1,8 @@
 import { Link } from "react-router-dom";
-import ChartSVG from "../assets/svg/ChartSVG";
-import ItensInputSVG from "../assets/svg/ItensInput";
-import ItensOutputSVG from "../assets/svg/ItensOutput";
-import { Funcao } from "../common/enums/enumFuncao";
+import PerfilSVG from "../assets/svg/PerfilSVG";
 import Title from "../components/common/Title";
 import ItemCadastro from "../components/register/ItemCadastro";
 import { useDataVoluntario } from "../hooks/useDataVoluntario";
-import PerfilSVG from "../assets/svg/PerfilSVG";
-import ManagerSVG from "../assets/svg/ManagerSVG";
 
 export default function ConfiguracoesPage() {
   const voluntario = useDataVoluntario();
@@ -25,11 +20,11 @@ export default function ConfiguracoesPage() {
         <Link to={"perfil"}>
           <ItemCadastro icon={<PerfilSVG />} desc="Perfil" />
         </Link>
-        {volutarioFuncao === Funcao.ADMIN.valueOf() && (
+        {/* {volutarioFuncao === Funcao.ADMIN.valueOf() && (
           <Link to={"gerenciamento"}>
             <ItemCadastro icon={<ManagerSVG />} desc="Gerenciamento" />
           </Link>
-        )}
+        )} */}
       </div>
     </section>
   );

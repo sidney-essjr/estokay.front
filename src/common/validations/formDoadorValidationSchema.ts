@@ -7,7 +7,7 @@ export const formDoadorSchemaValidation = z.object({
     .string()
     .trim()
     .optional()
-    .refine((val) => !val || /^[0-9]{8}$/.test(val), {
+    .refine((val) => !val || /^\d{8}$/.test(val), {
       message: "CEP inválido!",
     }),
   endereco: z.string().trim().optional(),

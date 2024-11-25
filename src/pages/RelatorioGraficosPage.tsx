@@ -15,7 +15,7 @@ export default function RelatoriosGraficosPage() {
         <h1>Relatórios Graficos</h1>
       </Title>
       <RelatorioGraficoViewForm {...methods} />
-      <Title className="text-center">
+      <Title className="text-center pt-8">
         <h2>Doações</h2>
       </Title>
       <GraficoView
@@ -24,7 +24,7 @@ export default function RelatoriosGraficosPage() {
         registrosPorCategoria={methods.registrosPorCategoriaEntrada}
         registrosPorUF={methods.registrosPorUfEntrada}
       />
-      <Title className="text-center">
+      <Title className="text-center pt-8">
         <h2>Distribuições</h2>
       </Title>
       <GraficoView
