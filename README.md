@@ -1,50 +1,39 @@
-# React + TypeScript + Vite
+# Frontend - EstOkay.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Tecnologias
 
-Currently, two official plugins are available:
+- Typescript
+- Vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Escopo
 
-## Expanding the ESLint configuration
+- Organizar e gerenciar as doações recebidas e distribuições realizadas, de forma segura e por meio de um sistema de estoque, que permite melhor visualização dos itens armazenados e de sua situação (validade).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Funcionalidades
 
-- Configure the top-level `parserOptions` property like this:
+- Login
+- Recuperação de senha
+- Cadastrar um doador
+- Cadastrar uma doação
+- Cadastrar um voluntario - Somente ADM
+- Cadastrar uma distribuição
+- Verificar itens em estoque
+- Editar itens em estoque - Somente ADM
+- Verificar relatório de saídas
+- Verificar relatório de entradas
+- Verificar relatório gráfico
+- Editar dados do voluntario
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Run project
+
+```jsx
+git clone https://github.com/sidney-essjr/estokay.front.git
+npm install
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Além dos comandos acima, é necessário adicionar o arquivo .env com a chave abaixo
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```jsx
+VITE_BASE_URL="https://localhost:3000"
 ```
